@@ -1,4 +1,4 @@
-word = "hello"
-number = 213
-boolean = true
-undef = undefined
+let word = "hello"
+let number = 213
+let boolean = true
+let undef = undefined
