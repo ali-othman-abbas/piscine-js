@@ -1,4 +1,4 @@
-let word = "hello"
-let number = 213
-let boolean = true
+let str = 'hello'
+let num = 213
+let bool = true
 let undef = undefined
