@@ -14,3 +14,8 @@ const nested = {
     bool: true,
   }
 }
+
+Object.freeze(escapeStr)
+Object.freeze(arr)
+Object.freeze(obj)
+Object.freeze(nested)
