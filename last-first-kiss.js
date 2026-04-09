@@ -10,7 +10,7 @@ function last(arg) {
   }
 }
 
-function last(arg) {
+function kiss(arg) {
   if (typeof arg == "string" && Array.isArray(arg)) {
     return [first[arg], last[arg]]
   }
