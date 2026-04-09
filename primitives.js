@@ -1,4 +1,4 @@
-str = "hello"
-num = 213
-bool = true
+word = "hello"
+number = 213
+boolean = true
 undef = undefined
