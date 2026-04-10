@@ -6,7 +6,7 @@ const sourceObject = {
 }
 function get(key) {
   if (Object.hasOwn(sourceObject, key)) {
-    return sourceObject.key
+    return sourceObject[key]
   }
 }
 
