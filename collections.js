@@ -18,12 +18,9 @@ const superTypeOf = function (val) {
     return 'Map'
   } else if (Array.isArray(val)) {
     return "Array"
-  } else if (val === null) {
-    return 'null'
-  } else if (typeof val === 'undefined') {
-    return 'undefined'
+  } else if (val === null || typeof val === 'undefined') {
+    return val
   }
-  
   return (typeof val).charAt(0).toUpperCase() + (typeof val).slice(1)
 }
 // const objToArr = ()
