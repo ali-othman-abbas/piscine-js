@@ -7,6 +7,5 @@ const keepFirstLast = str =>
   str.length >= 4
     ? `${keepFirst(str)}${keepLast(str)}`
     : str.length == 3
-      ? `${keepFirst(str)}${str[length - 1]}`
+      ? `${keepFirst(str)}${str[str.length - 1]}`
       : keepFirst(str)
-
