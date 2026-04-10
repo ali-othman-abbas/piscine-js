@@ -1,10 +1,15 @@
-const slice = (str, start, end = str.length) =>
-  (end > str.length)
-    ? slice(str, start, str.length)
+const slice = (col, start, end = col.length) =>
+  end > col.length
+    ? slice(col, start, col.length)
     : end < 0
-      ? slice(str, start, Math.max(str.length + end, 0))
+      ? slice(col, start, Math.max(col.length + end, 0))
       : start < 0
-        ? slice(str, Math.max(str.length + start, 0), end)
-        : start < end
-          ? str[start] + slice(str, start + 1, end)
-          : ""
+        ? slice(col, Math.max(col.length + start, 0), end)
+        : typeof col === "string"
+          ? start < end
+            ? col[start] + slice(col, start + 1, end)
+            : ""
+          : start < end
+            ? [col[start], ...slice(col, start + 1, end)]
+            : [];
+
