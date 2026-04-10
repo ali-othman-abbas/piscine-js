@@ -1,0 +1,1 @@
+const sign = (num1) => (num1 == 0) ? 0 : num1/(Math.abs(num1))
