@@ -15,4 +15,3 @@ const modulo = (a, b) =>
   a < 0 ? -positiveMod(-a, Math.abs(b)) : positiveMod(a, Math.abs(b));
 const positiveMod = (a, b) => (b <= a ? positiveMod(a - b, b) : a);
 
-console.log(modulo(34, 78));
