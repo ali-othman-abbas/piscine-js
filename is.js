@@ -1,13 +1,15 @@
 const is = {}
 
 
-is.num = 0
-is.nan = NaN
-is.str = "0"
-is.bool = true
-is.undef = undefined
-is.arr = []
-is.obj = {}
-is.fun = () => { }
-is.truthy = 1
-is.falsy = 0
+is.num = (v) => typeof v === 'number'
+is.nan = (v) => v !== v
+is.str = (v) => typeof v === 'string'
+is.bool = (v) => typeof v === 'boolean'
+is.undef = (v) => v === undefined
+is.arr = (v) => Array.isArray(v)
+is.obj = (v) => typeof v === 'object' || v === null
+is.fun = (v) => typeof v === 'function'
+is.truthy = (v) => !!v
+is.falsy = (v) => !!v
+
+console.log(is.undef(hello))
