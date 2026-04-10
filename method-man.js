@@ -27,7 +27,7 @@ function whisper(str) {
     return
   }
   
-  return `*${str.toLowerCase}*`
+  return `*${str.toLowerCase()}*`
 }
 
 function capitalize(str) {
@@ -38,3 +38,4 @@ function capitalize(str) {
   
   return `${str.charAt(0).toUpperCase()}${str.slice(1)}`
 }
+
