@@ -1,8 +1,6 @@
 function get(key) {
   if (Object.hasOwn(sourceObject, key)) {
     return sourceObject[key]
-  } else {
-    return "nice"
   }
 }
 
