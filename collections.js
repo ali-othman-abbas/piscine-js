@@ -12,14 +12,8 @@ const arrToObj = (arr) => { return { ...arr } }
 const strToObj = (str) => { return { ...str } }
 
 const superTypeOf = function (val) {
-  if (val instanceof Set) {
-    return 'Set'
-  } else if (val instanceof Map) {
-    return 'Map'
-  } else if (Array.isArray(val)) {
-    return "Array"
-  } else if (val === null || typeof val === 'undefined') {
+  if (val === null || typeof val === 'undefined') {
     return `${val}`
   }
-  return (typeof val).charAt(0).toUpperCase() + (typeof val).slice(1)
+  return val.constructor.name
 }
