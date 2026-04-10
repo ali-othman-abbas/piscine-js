@@ -19,7 +19,7 @@ const superTypeOf = function (val) {
   } else if (Array.isArray(val)) {
     return "Array"
   } else if (val === null || typeof val === 'undefined') {
-    return val
+    return `${val}`
   }
   return (typeof val).charAt(0).toUpperCase() + (typeof val).slice(1)
 }
