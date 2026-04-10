@@ -1,4 +1,7 @@
 function floor(num) {
+  if (num < 0) {
+    return num - (1 + (num % 1))
+  }
   return num - (num % 1)
 }
 
