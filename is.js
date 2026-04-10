@@ -11,5 +11,3 @@ is.obj = (v) => typeof v === 'object' || v === null
 is.fun = (v) => typeof v === 'function'
 is.truthy = (v) => !!v
 is.falsy = (v) => !!v
-
-console.log(is.undef(hello))
