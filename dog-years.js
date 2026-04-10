@@ -8,7 +8,8 @@ const ageConvs = {
   'neptune': 164.79132 
 }
 function dogYears(planetName, dogAgeInSecs) {
-  return ((dogAgeInSecs/(31_557_600))*ageConvs[planetName]*7).toFixed(2)
+  const roundedResult = ((dogAgeInSecs/(31_557_600))*ageConvs[planetName]*7).toFixed(2)
+  return parseFloat(roundedResult)
 }
 
 console.log(dogYears('earth', 1_000_000_000))
