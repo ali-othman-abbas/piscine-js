@@ -6,8 +6,7 @@ function get(key) {
 
 function set(key, value) {
   if (Object.hasOwn(sourceObject, key)) {
-    val = sourceObject[key]
     sourceObject[key] = value
-    return val
+    return value
   }
 }
