@@ -1,21 +1,15 @@
 function sums(num) {
-  const inner = (num, upTo = num) => {
+  solutionSet = []
+  const inner = (num, start = 1, arr = []) => {
     if (num === 0) {
-      return [[]]
+      return solutionSet.push(Array.from(arr))
     }
-    
-    if (num < 0 || upTo === 0) {
-      return []
+    for (let i = start; i <= num; i++) {
+      arr.push(i)
+      inner(num - i, i, arr)
+      arr.pop(i)
     }
-    
-    const arr1 = inner(num, upTo - 1)
-    const arr2 = inner(num - upTo, upTo)
-    for (let i = 0; i < arr2.length; i++) {
-      arr2[i].push(upTo)
-    }
-    
-    
-    return [...arr1, ...arr2]
   }
-  return inner(num).slice(0, -1)
+  inner(num)
+  return solutionSet.slice(0, -1)
 }
