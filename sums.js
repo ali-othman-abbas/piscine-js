@@ -1,5 +1,5 @@
 function sums(num) {
-  solutionSet = []
+  const solutionSet = []
   const inner = (num, start = 1, arr = []) => {
     if (num === 0) {
       return solutionSet.push(Array.from(arr))
