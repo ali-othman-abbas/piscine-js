@@ -3,26 +3,23 @@ function split(str, sep) {
     return Array.from(str)
   }
   const arr = []
+  let start = 0
   for (let i = 0; i < str.length;) {
     let j = 0
-    while (i + j < str.length) {
-      while (i + j < str.length && str[i + j] !== sep[0]) j++
-      if (i + j >= str.length) {
-        arr.push(str.slice(i, i + j))
-        break
-      }
-      let l = 0
-      while (i + j + l < str.length && l < sep.length && str[i + j + l] === sep[l]) l++
-      
-      if (l === sep.length) {
-        arr.push(str.slice(i, i + j))
-        j = j + l
-        break
-      }
-      j = j + l
+    while (j < sep.length && i + j < str.length && str[i + j] === sep[j]) j++
+    if (j === sep.length) {
+      arr.push(str.slice(start, i))
+      i = i + j
+      start = i
+      continue
     }
-    i = i + j
+    if (j > 0) {
+      i = i + j
+    } else {
+      i++
+    }
   }
+  arr.push(str.slice(start))
   return arr
 }
 
@@ -37,3 +34,5 @@ function join(arr, sep) {
   
   return word
 }
+
+console.log(split('ee,ff,g,', ''))
