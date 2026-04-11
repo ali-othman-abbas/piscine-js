@@ -1,7 +1,7 @@
 const reverse = (ele) =>
   Array.isArray(ele)
     ? arrReverse(ele)
-    : arrReverse(Array.from(ele))
+    : arrReverse(Array.from(ele)).join("")
 
 const arrReverse = (arr) =>
   arr.length === 0
