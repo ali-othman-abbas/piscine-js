@@ -1,8 +1,6 @@
 function floor(num) {
-  if (num < 0) {
-    return num - (1 + (num % 1))
-  }
-  return num - ((num - num + 1) / 2)
+  const base = trunc(num)
+  return num >= 0 ? base : base - 1
 }
 
 function ceil(num) {
@@ -42,5 +40,3 @@ function trunc(num) {
   
   return sign * result
 }
-
-console.log(trunc(1))
