@@ -15,7 +15,3 @@ function sums(num, upTo = num) {
   
   return [...arr1, ...arr2]
 }
-
-result = sums(4)
-
-console.log(result)
