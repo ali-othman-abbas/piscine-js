@@ -2,7 +2,7 @@ const add4 = '+4'
 const mul2 = '*2'
 const findExpression = (number, num = 1, result = ['1']) => {
   if (number === num) {
-    return result.join("")
+    return result.join(" ")
   }
   if (num > number) return
   result.push(mul2)
