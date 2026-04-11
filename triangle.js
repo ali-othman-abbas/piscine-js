@@ -3,13 +3,11 @@ const triangle = (char, depth, i = 1, result = []) => {
     return result.join("")
   }
 
-  row = [...char.repeat(i)]
+  const row = [...char.repeat(i)]
   if (i < depth) {
     row.push("\n")
   }
   result.push(row.join(""))
   
-  return triangle(depth, i + 1, result)
+  return triangle(char, depth, i + 1, result)
 }
-
-console.log(triangle('#', 4))
