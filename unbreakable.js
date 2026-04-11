@@ -24,7 +24,7 @@ function split(str, sep) {
 }
 
 function join(arr, sep) {
-  word = ""
+  let word = ""
   for (let i = 0; i < arr.length; i++) {
     word = word + arr[i]
     if (i < arr.length - 1) {
@@ -34,5 +34,3 @@ function join(arr, sep) {
   
   return word
 }
-
-console.log(split('ee,ff,g,', ''))
