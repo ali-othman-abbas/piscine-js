@@ -8,8 +8,8 @@ const arrReverse = (arr, l = 0, r = arr.length - 1) => {
     return
   }
   
-  const tmp = arr[0]
-  arr[0] = arr[arr.length - 1]
-  arr[arr.length - 1] = tmp
+  const tmp = arr[l]
+  arr[r] = arr[l]
+  arr[l] = tmp
   arrReverse(arr, l + 1, r - 1)
 }
