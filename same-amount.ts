@@ -1,8 +1,14 @@
 function sameAmount(str: string, regex1: RegExp, regex2: RegExp) {
-  const regex1G = (regex1.global) ?  regex1 : new RegExp(regex1.source, regex1.flags + 'g')
-  const regex2G = (regex2.global) ?  regex2 : new RegExp(regex2, regex2.flags + 'g')
   
-  const matches1 = Array.from(str.matchAll(regex1G)).length
-  const matches2 = Array.from(str.matchAll(regex2G)).length
-  return matches1 === matches2
+  function countMatches(str: string, regex: RegExp) {
+    const regexG = (regex.global) ?  regex : new RegExp(regex.source, regex.flags + 'g')
+    let count = 0
+    while (regexG.exec(str) !== null) {
+      count++
+    }
+    return count
+  }
+  
+  
+  return countMatches(str, regex1) === countMatches(str, regex2)
 }
