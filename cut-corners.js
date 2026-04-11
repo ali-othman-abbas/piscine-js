@@ -2,7 +2,7 @@ function floor(num) {
   if (num < 0) {
     return num - (1 + (num % 1))
   }
-  return num - (num % 1)
+  return num - ((num - num + 1) / 2)
 }
 
 function ceil(num) {
@@ -18,9 +18,29 @@ function round(num) {
 }
 
 function trunc(num) {
+  let sign = 1
   if (num < 0) {
-    return ceil(num)
-  } else {
-    return floor(num)
+    num = -num
+    sign = -1
   }
+  
+  let result = 0
+  let i = 0
+  while (i <= num) {
+    let j = 1
+    while (i + j <= num) {
+      j = j * 2
+    }
+    
+    if (j > 1) {
+      result = i + (j/2)
+      i = i + (j/2)
+    } else {
+      i++
+    }
+  }
+  
+  return sign * result
 }
+
+console.log(trunc(1))
