@@ -1,12 +1,13 @@
 const triangle = (depth, i = 1, result = []) => {
   if (i === depth + 1) {
-    return result
+    return result.join("")
   }
 
-  result.push('*'.repeat(i) )
-  result.push("\n")
+  if (i < depth) {
+    result.push([...'*'.repeat(i), '\n'].join(""))
+  } else {
+    result.push([...'*'.repeat(i)].join(""))
+  }
   
   return triangle(depth, i + 1, result)
 }
-
-console.log(triangle(5))
