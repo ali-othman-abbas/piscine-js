@@ -1,3 +1,4 @@
+const vowels: RegExp = /([aeiou])/g
 function vowelDots(str: string) {
-  return str.replace(/([aeiou])/g, "$1.")
+  return str.replace(vowels, "$1.")
 }

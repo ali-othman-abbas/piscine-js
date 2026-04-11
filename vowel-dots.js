@@ -1,3 +1,4 @@
+var vowels = /([aeiou])/g;
 function vowelDots(str) {
-    return str.replace(/([aeiou])/g, "$1.");
+    return str.replace(vowels, "$1.");
 }
