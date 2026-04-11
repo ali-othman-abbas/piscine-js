@@ -7,17 +7,17 @@ function sums(num) {
       return [[]]
     }
     
-    if (upTo === 0) {
+    if (num < 0 || upTo === 0) {
       return []
     }
     
-    const arr1 = sums(num, upTo - 1)
-    const arr2 = sums(num - upTo, num - upTo)
+    const arr1 = inner(num, upTo - 1)
+    const arr2 = inner(num - upTo, upTo)
     for (let i = 0; i < arr2.length; i++) {
       arr2[i].push(upTo)
     }
     
     return [...arr1, ...arr2]
   }
-  inner(num)
+  return inner(num)
 }
