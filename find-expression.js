@@ -15,6 +15,3 @@ const findExpression = (number, num = 1, result = ['1']) => {
   result.pop(add4)
   return
 }
-
-solution = findExpression(100)
-console.log(solution)
