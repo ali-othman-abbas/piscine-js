@@ -1,7 +1,4 @@
 function sums(num) {
-  if (num == 0) {
-    return []
-  }
   const inner = (num, upTo = num) => {
     if (num === 0) {
       return [[]]
@@ -17,7 +14,8 @@ function sums(num) {
       arr2[i].push(upTo)
     }
     
+    
     return [...arr1, ...arr2]
   }
-  return inner(num)
+  return inner(num).slice(0, -1)
 }
