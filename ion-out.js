@@ -1,4 +1,4 @@
 function ionOut(str) {
-  const result = str.match(/[a-zA-Z]*t(?=ion)/g)
-  return (result) ? result : []
+  const result = str.match(/\b[a-zA-Z]*t(?=ion)\b/g) ?? []
+  return result
 }
