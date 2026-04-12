@@ -1,5 +1,5 @@
 var authority = /(?:[\w-]+\.)+[\w-]+/;
-var path = /(?:\/[\w-]+)*\/?/;
+var path = /(?:\/[\w-.@]+)*/;
 function getURL(str) {
     var _a;
     var parameters = /(?:\?(?:[\w-]+=[\w-]+&)*[\w-]+=[\w-]+)?/;
