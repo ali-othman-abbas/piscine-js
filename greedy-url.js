@@ -13,5 +13,6 @@ function notSoGreedy(str) {
     var parameters = /\bhttps?:\/\/[^\s]+\?(?:[^\s=&]+=[^\s=&]+&){1,2}[^\s=&]+=[^\s=&]+(?=\s|$)/g;
     return (_a = str.match(parameters)) !== null && _a !== void 0 ? _a : [];
 }
-var result = notSoGreedy('http://hummm/how?how=come&same=[123,21]&you=nextperson&id=123312&next=123DSAD&ok=true&notOk=true');
+var s = "http://example.com/hello?you=something&something=you";
+var result = notSoGreedy(s);
 console.log(result);
