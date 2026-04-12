@@ -5,11 +5,11 @@ function getURL(str) {
 }
 function greedyQuery(str) {
     var _a;
-    var parameters = /\bhttps?:\/\/[^\s]+\?([^\s=&]+=[^\s=&]+&){2,}[^\s=&]+=[^\s=&]+(?=\s|$)/g;
+    var parameters = /https?:\/\/[^\s]+\?([^\s=&]+=[^\s=&]+&){2,}[^\s=&]+=[^\s=&]+(?=\s|$)/g;
     return (_a = str.match(parameters)) !== null && _a !== void 0 ? _a : [];
 }
 function notSoGreedy(str) {
     var _a;
-    var parameters = /\bhttps?:\/\/[^\s]+\?(?:[^\s=&]+=[^\s=&]+&){1,2}[^\s=&]+=[^\s=&]+(?=\s|$)/g;
+    var parameters = /https?:\/\/[^\s]+\?(?:[^\s=&]+=[^\s=&]+&){1,2}[^\s=&]+=[^\s=&]+(?=\s|$)/g;
     return (_a = str.match(parameters)) !== null && _a !== void 0 ? _a : [];
 }
