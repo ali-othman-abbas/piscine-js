@@ -4,13 +4,13 @@ function getURL(str: string): Array<string> {
 }
 
 function greedyQuery(str: string): Array<string> {
-  const parameters = /\?([^\s=&]+=[^\s=&]+&){2,}[^\s=&]+=[^\s=&]+/
+  const parameters = /\?([^\s=&]+=[^\s=&]+&){2,}[^\s=&]+=[^\s=&]+\b/
   const combined = new RegExp(`${regex.source}${parameters.source}`, 'g')
   return str.match(combined) ?? []
 }
 
 function notSoGreedy(str: string): Array<string> {
-  const parameters = /\?(?:[^\s=&]+=[^\s=&]+&){1,2}[^\s=&]+=[^\s=&]+/
+  const parameters = /\?(?:[^\s=&]+=[^\s=&]+&){1,2}[^\s=&]+=[^\s=&]+\b/
   const combined = new RegExp(`${regex.source}${parameters.source}`, 'g')
   return str.match(combined) ?? []
 }
