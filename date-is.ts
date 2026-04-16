@@ -13,7 +13,10 @@ const isAfter = (date1: Date | number, date2: Date | number) => {
   return date1.getTime() > date2.getTime()
 }
 
-const isBefore = (date1: Date, date2: Date) => {
+const isBefore = (date1: Date | number, date2: Date | number) => {
+  if (!isValid(date1) || !isValid(date2)) {
+    return false
+  }
   if (typeof date1 === 'number') {
     date1 = new Date(date1)
   }
