@@ -1,18 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 function firstDayWeek(num, str) {
     if (num === 1) {
-        return "01-01-".concat(str);
+        return `01-01-${str}`;
     }
-    var dayTime = 24 * 60 * 60 * 1000;
-    var date = new Date("".concat(str, "-01-01"));
-    var weekDay = date.getUTCDay();
+    const dayTime = 24 * 60 * 60 * 1000;
+    const date = new Date(`${str}-01-01`);
+    let weekDay = date.getUTCDay();
     if (weekDay === 0) {
         weekDay = 7;
     }
     date.setTime(date.getTime() - weekDay * dayTime + dayTime);
     num = num - 1;
-    var result = new Date(date.getTime() + num * 7 * dayTime);
-    var day = String(result.getUTCDate()).padStart(2, "0");
-    var month = String(result.getUTCMonth() + 1).padStart(2, "0");
-    var year = String(result.getUTCFullYear()).padStart(4, "0");
-    return "".concat(day, "-").concat(month, "-").concat(year);
+    const result = new Date(date.getTime() + num * 7 * dayTime);
+    const day = String(result.getUTCDate()).padStart(2, "0");
+    const month = String(result.getUTCMonth() + 1).padStart(2, "0");
+    const year = String(result.getUTCFullYear()).padStart(4, "0");
+    return `${day}-${month}-${year}`;
 }
+//# sourceMappingURL=get-some-time.js.map

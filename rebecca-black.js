@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 function isFriday(date) {
     return date.getDay() === 5;
 }
@@ -23,3 +25,4 @@ function isLastDayOfMonth(date) {
             return date.getDate() === 30;
     }
 }
+//# sourceMappingURL=rebecca-black.js.map

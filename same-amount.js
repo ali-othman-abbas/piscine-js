@@ -1,7 +1,9 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 function sameAmount(str, regex1, regex2) {
     function countMatches(str, regex) {
-        var regexG = (regex.global) ? regex : new RegExp(regex.source, regex.flags + 'g');
-        var count = 0;
+        const regexG = (regex.global) ? regex : new RegExp(regex.source, regex.flags + 'g');
+        let count = 0;
         while (regexG.exec(str) !== null) {
             count++;
         }
@@ -9,3 +11,4 @@ function sameAmount(str, regex1, regex2) {
     }
     return countMatches(str, regex1) === countMatches(str, regex2);
 }
+//# sourceMappingURL=same-amount.js.map

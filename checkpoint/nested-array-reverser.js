@@ -1,10 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 function nestedArrayReverser(words) {
-    var _a;
     words.reverse();
-    for (var i = 0; i < words.length; i++) {
-        (_a = words[i]) === null || _a === void 0 ? void 0 : _a.reverse();
+    for (let i = 0; i < words.length; i++) {
+        words[i]?.reverse();
     }
-    var result = words.flat(Infinity).join(" ");
+    const result = words.flat(Infinity).join(" ");
     return result;
 }
 console.log(nestedArrayReverser([
@@ -13,3 +14,4 @@ console.log(nestedArrayReverser([
     ["a", "test"],
 ]));
 console.log(nestedArrayReverser([]));
+//# sourceMappingURL=nested-array-reverser.js.map

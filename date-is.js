@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 //const tests = []
 //const t = (f: any) => tests.push(f)
 //
@@ -15,11 +17,9 @@
 //    }
 //  }
 //}
-var isValid = function (date) {
-    return (date instanceof Date && !Number.isNaN(date.getTime())) ||
-        (typeof date === "number" && !Number.isNaN(new Date(date).getTime()));
-};
-var isAfter = function (date1, date2) {
+const isValid = (date) => (date instanceof Date && !Number.isNaN(date.getTime())) ||
+    (typeof date === "number" && !Number.isNaN(new Date(date).getTime()));
+const isAfter = (date1, date2) => {
     if (!isValid(date1) || !isValid(date2)) {
         return false;
     }
@@ -31,7 +31,7 @@ var isAfter = function (date1, date2) {
     }
     return date1.getTime() > date2.getTime();
 };
-var isBefore = function (date1, date2) {
+const isBefore = (date1, date2) => {
     if (!isValid(date1) || !isValid(date2)) {
         return false;
     }
@@ -43,12 +43,8 @@ var isBefore = function (date1, date2) {
     }
     return date1.getTime() < date2.getTime();
 };
-var isFuture = function (date) {
-    return isValid(date) && isAfter(date, new Date(Date.now()));
-};
-var isPast = function (date) {
-    return isValid(date) && isBefore(date, new Date(Date.now()));
-};
+const isFuture = (date) => isValid(date) && isAfter(date, new Date(Date.now()));
+const isPast = (date) => isValid(date) && isBefore(date, new Date(Date.now()));
 // isValid
 //t(() => !invalid(isValid))
 //t(() => isValid(new Date()))
@@ -85,3 +81,4 @@ var isPast = function (date) {
 //t(() => !isPast(new Date(2077, 11, 31)))
 //t(() => isPast(new Date(1442, 11, 31)))
 //t(() => isPast(new Date(Date.now() - 1)))
+//# sourceMappingURL=date-is.js.map

@@ -1,15 +1,15 @@
-var regex = /https?:\/\/[^\s]+/;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const regex = /https?:\/\/[^\s]+/;
 function getURL(str) {
-    var _a;
-    return (_a = str.match(new RegExp(regex.source, 'g'))) !== null && _a !== void 0 ? _a : [];
+    return str.match(new RegExp(regex.source, 'g')) ?? [];
 }
 function greedyQuery(str) {
-    var _a;
-    var parameters = /https?:\/\/[^\s]+\?([^\s=&]+=[^\s=&]+&){2,}[^\s=&]+=[^\s=&]+(?=\s|$)/g;
-    return (_a = str.match(parameters)) !== null && _a !== void 0 ? _a : [];
+    const parameters = /https?:\/\/[^\s]+\?([^\s=&]+=[^\s=&]+&){2,}[^\s=&]+=[^\s=&]+(?=\s|$)/g;
+    return str.match(parameters) ?? [];
 }
 function notSoGreedy(str) {
-    var _a;
-    var parameters = /https?:\/\/[^\s]+\?(?:[^\s=&]+=[^\s=&]+&){1,2}[^\s=&]+=[^\s=&]+(?=\s|$)/g;
-    return (_a = str.match(parameters)) !== null && _a !== void 0 ? _a : [];
+    const parameters = /https?:\/\/[^\s]+\?(?:[^\s=&]+=[^\s=&]+&){1,2}[^\s=&]+=[^\s=&]+(?=\s|$)/g;
+    return str.match(parameters) ?? [];
 }
+//# sourceMappingURL=greedy-url.js.map
