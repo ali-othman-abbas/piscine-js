@@ -3,7 +3,7 @@ function dayOfTheYear(date) {
     var daysNum = date.getUTCDate();
     var previousMonths = date.getUTCMonth();
     daysNum = daysNum + 30 * previousMonths + days[previousMonths];
-    if (date.getUTCFullYear() % 4 === 0) {
+    if (date.getMonth() > 1 && date.getUTCFullYear() % 4 === 0) {
         daysNum++;
     }
     return daysNum;
