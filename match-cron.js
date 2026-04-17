@@ -1,5 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 function matchCron(str, date) {
     const tokens = str.split(' ');
     const obj = {
