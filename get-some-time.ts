@@ -5,7 +5,11 @@ function firstDayWeek(num: number, str: string) {
   const dayTime = 24 * 60 * 60 * 1000
   
   const date = new Date(`${str}-01-01`);
-  date.setTime(date.getTime() - date.getDay() * dayTime + dayTime)
+  let weekDay = date.getUTCDay()
+  if (weekDay === 0) {
+    weekDay = 7
+  }
+  date.setTime(date.getTime() - weekDay * dayTime + dayTime)
 
   num = num - 1;
   const result = new Date(date.getTime() + num * 7 * dayTime);
