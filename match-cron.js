@@ -1,4 +1,3 @@
-"use strict";
 function matchCron(str, date) {
     const tokens = str.split(' ');
     const obj = {
