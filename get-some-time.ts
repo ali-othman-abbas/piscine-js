@@ -1,12 +1,39 @@
+
 function firstDayWeek(num: number, str: string) {
-  const date = new Date(0)
-  date.setFullYear(Number(str))
-  num = num - 1
-  const milliInDay = 24 * 60 * 60 * 1000
-  date.setTime(num * 7 * milliInDay + date.getTime() -  2 * milliInDay)
-  const day = String(date.getDate()).padStart(2,'0')
-  const month = String(date.getMonth() + 1).padStart(2, '0')
-  const year = date.getFullYear()
-  
-  return `${day}-${month}-${year}`
+  if (num == 1) {
+    return `01-01-${str}`
+  }
+  const milliInDay = 24 * 60 * 60 * 1000;
+
+  const epochMonday = new Date(0);
+  epochMonday.setTime(epochMonday.getTime() - 3 * milliInDay);
+
+  const startOfYear = new Date(0);
+  startOfYear.setFullYear(Number(str));
+
+  const diff = Math.abs(
+    new Date(epochMonday.getTime() - startOfYear.getTime()).getTime(),
+  );
+
+  const daysDiff = Math.trunc(diff / milliInDay);
+  const rem = daysDiff % 7;
+  // + (daysDiff - rem) * milliInDay
+  const StartOfYearMonday = new Date(epochMonday.getTime());
+  if (epochMonday.getTime() > startOfYear.getTime()) {
+    StartOfYearMonday.setTime(
+      StartOfYearMonday.getTime() - (daysDiff - rem + 7) * milliInDay,
+    );
+  } else {
+    StartOfYearMonday.setTime(
+      StartOfYearMonday.getTime() + (daysDiff - rem) * milliInDay,
+    );
+  }
+
+  num = num - 1;
+  const result = new Date(StartOfYearMonday.getTime() + num * 7 * milliInDay);
+  const day = String(result.getUTCDate()).padStart(2, "0");
+  const month = String(result.getUTCMonth() + 1).padStart(2, "0");
+  const year = String(result.getUTCFullYear()).padStart(4, "0");
+
+  return `${day}-${month}-${year}`;
 }
