@@ -19,11 +19,8 @@ function firstDayWeek(num, str) {
 
   if (epochMonday.getTime() > startOfYear.getTime()) {
     StartOfYearMonday.setTime(
-      StartOfYearMonday.getTime() - (daysDiff - rem + 7) * milliInDay,
+      StartOfYearMonday.getTime() - (daysDiff - rem + (rem === 0 ? 0 : 7)) * milliInDay,
     );
-    if (rem === 0) {
-      StartOfYearMonday.setTime(StartOfYearMonday.getTime() + 7 * milliInDay);
-    }
   } else {
     StartOfYearMonday.setTime(
       StartOfYearMonday.getTime() + (daysDiff - rem) * milliInDay,
