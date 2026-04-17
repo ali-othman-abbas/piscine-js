@@ -1,5 +1,5 @@
 function firstDayWeek(num, str) {
-  if (num == 1) {
+  if (num === 1) {
     return `01-01-${str}`;
   }
   const milliInDay = 24 * 60 * 60 * 1000;
@@ -16,10 +16,14 @@ function firstDayWeek(num, str) {
   const rem = daysDiff % 7;
   // + (daysDiff - rem) * milliInDay
   const StartOfYearMonday = new Date(epochMonday.getTime());
+
   if (epochMonday.getTime() > startOfYear.getTime()) {
     StartOfYearMonday.setTime(
       StartOfYearMonday.getTime() - (daysDiff - rem + 7) * milliInDay,
     );
+    if (rem === 0) {
+      StartOfYearMonday.setTime(StartOfYearMonday.getTime() + 7 * milliInDay);
+    }
   } else {
     StartOfYearMonday.setTime(
       StartOfYearMonday.getTime() + (daysDiff - rem) * milliInDay,
