@@ -14,7 +14,7 @@ function foldRight<T>(
   func: (x: T, y: T, idx: number, arr: T[]) => T,
   accumulator: T,
 ) {
-  return fold(arr.reverse(), func, accumulator);
+  return fold([...arr].reverse(), func, accumulator);
 }
 function reduce<T>(
   arr: T[],
@@ -37,5 +37,5 @@ function reduceRight<T>(
   func: (x: T, y: T, idx: number, arr: T[]) => T,
   accumulator?: T,
 ) {
-  return reduce(arr.reverse(), func, accumulator);
+  return reduce([...arr].reverse(), func, accumulator);
 }
