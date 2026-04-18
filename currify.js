@@ -1,14 +1,12 @@
-function currify(func) {
-  const args = []
-  function rec(x) {
-    args.push(x)
+const currify = (func) => {
+  const rec = (...args) => {
     if (args.length === func.length) {
       return func(...args)
     }
     
     
-    return rec 
+    return (newArgs) => rec(...args, newArgs) 
   }
-  
-  return rec
+  return (x) => rec(x)
 }
+  
