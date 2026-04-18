@@ -19,15 +19,14 @@ function fahrenheitToCelsius(arr: string[]) {
 
 function trimTemp(arr: Record<string, string>[]) {
   return arr.map((ele) => {
-    ele["temperature"] = ele["temperature"]?.trim()!;
+    ele["temperature"] = `${ele["temperature"]?.match(/-?\d+/)![0]}°F`;
     return ele;
   });
 }
 
 function tempForecasts(arr: Record<string, string>[]) {
-  const deg = fahrenheitToCelsius(
-    arr.map((ele) => `${ele["temperature"]?.match(/-?\d+/)![0]}°F`),
-  );
+  arr = trimTemp(arr);
+  const deg = fahrenheitToCelsius(arr.map((ele) => ele["temperature"]!));
   const cap = upperCasingStates(arr.map((ele) => ele["state"]!));
   return arr.map(
     (ele, idx) => `${deg[idx]}elsius in ${ele["city"]}, ${cap[idx]}`,
