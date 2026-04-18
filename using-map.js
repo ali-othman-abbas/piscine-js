@@ -1,5 +1,5 @@
 var citiesOnly = function (arr) {
-    return arr.map(function (ele) { return ele["temperature"]; });
+    return arr.map(function (ele) { return ele["city"]; });
 };
 function upperCasingStates(arr) {
     return arr.map(function (ele) { return ele.split(" ").map(function (subEle) { return subEle.toUpperCase().charAt(0) + subEle.slice(1); }).join(" "); });

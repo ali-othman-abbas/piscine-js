@@ -1,5 +1,5 @@
 const citiesOnly = (arr: Record<string, string>[]) =>
-  arr.map((ele) => ele["temperature"]);
+  arr.map((ele) => ele["city"]);
 
 function upperCasingStates(arr: string[]) {
   return arr.map(
