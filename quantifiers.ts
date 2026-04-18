@@ -4,7 +4,7 @@ function every<T>(
 ): boolean {
   let bool = true
   for (let i = 0; i < arr.length; i++) {
-    bool = bool || func(arr[i]!, i, arr)
+    bool = bool && func(arr[i]!, i, arr)
   }
   
   return bool

@@ -1,7 +1,7 @@
 function every(arr, func) {
     var bool = true;
     for (var i = 0; i < arr.length; i++) {
-        bool = bool || func(arr[i], i, arr);
+        bool = bool && func(arr[i], i, arr);
     }
     return bool;
 }
