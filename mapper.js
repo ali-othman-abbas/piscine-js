@@ -5,3 +5,7 @@ function map(arr, func) {
     }
     return result;
 }
+function flatMap(arr, func) {
+    var result = map(arr, func);
+    return result.flat(1);
+}
