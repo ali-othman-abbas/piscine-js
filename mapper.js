@@ -1,11 +1,24 @@
 function map(arr, func) {
-    var result = [];
-    for (var i = 0; i < arr.length; i++) {
-        result.push(func(arr[i], i, arr));
-    }
-    return result;
+  const result = [];
+  for (let i = 0; i < arr.length; i++) {
+    result.push(func(arr[i], i, arr));
+  }
+
+  return result;
 }
+
 function flatMap(arr, func) {
-    var result = map(arr, func);
-    return result.flat(1);
+  const result = map(arr, func)
+  const flatResult = []
+  for (let i = 0; i < result.length; i++) {
+    if (Array.isArray(result[i])) {
+      for (let j = 0; j < result[i].length; j++) {
+        flatResult.push(result[i][j])
+      }
+    } else {
+      flatResult.push(result[i])
+    }
+  }
+  return flatResult
 }
+
