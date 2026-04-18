@@ -24,9 +24,10 @@ function trimTemp(arr: Record<string, string>[]) {
 }
 
 function tempForecasts(arr: Record<string, string>[]) {
-  const deg = fahrenheitToCelsius(arr.map((ele) => ele["temperature"]!));
-  const cap = upperCasingStates(arr.map((ele) => ele["state"]!));
-  return arr.map(
+  const trimmed = trimTemp(arr)
+  const deg = fahrenheitToCelsius(trimmed.map((ele) => ele["temperature"]!));
+  const cap = upperCasingStates(trimmed.map((ele) => ele["state"]!));
+  return trimmed.map(
     (ele, idx) => `${deg[idx]}elsius in ${ele["city"]}, ${cap[idx]}`,
   );
 }

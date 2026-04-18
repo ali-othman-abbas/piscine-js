@@ -18,7 +18,8 @@ function trimTemp(arr) {
     });
 }
 function tempForecasts(arr) {
-    var deg = fahrenheitToCelsius(arr.map(function (ele) { return ele["temperature"]; }));
-    var cap = upperCasingStates(arr.map(function (ele) { return ele["state"]; }));
-    return arr.map(function (ele, idx) { return "".concat(deg[idx], "elsius in ").concat(ele["city"], ", ").concat(cap[idx]); });
+    var trimmed = trimTemp(arr);
+    var deg = fahrenheitToCelsius(trimmed.map(function (ele) { return ele["temperature"]; }));
+    var cap = upperCasingStates(trimmed.map(function (ele) { return ele["state"]; }));
+    return trimmed.map(function (ele, idx) { return "".concat(deg[idx], "elsius in ").concat(ele["city"], ", ").concat(cap[idx]); });
 }
