@@ -5,7 +5,7 @@ const vowels = new Set(["a", "e", "i", "o", "u"]);
 const filterStartVowel = (arr: string[]) =>
   arr.filter((ele) => vowels.has(ele[0]?.toLowerCase()!));
 
-const filter5vowels = (arr: string[]) =>
+const filter5Vowels = (arr: string[]) =>
   arr.filter((ele) => {
     let count = 0;
     Array.from(ele).forEach(

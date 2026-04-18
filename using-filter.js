@@ -5,7 +5,7 @@ var vowels = new Set(["a", "e", "i", "o", "u"]);
 var filterStartVowel = function (arr) {
     return arr.filter(function (ele) { var _a; return vowels.has((_a = ele[0]) === null || _a === void 0 ? void 0 : _a.toLowerCase()); });
 };
-var filter5vowels = function (arr) {
+var filter5Vowels = function (arr) {
     return arr.filter(function (ele) {
         var count = 0;
         Array.from(ele).forEach(function (char) { return vowels.has(char.toLowerCase()) && count++; });
