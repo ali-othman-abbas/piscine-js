@@ -7,7 +7,7 @@ function upperCasingStates(arr) {
 function fahrenheitToCelsius(arr) {
     return arr.map(function (ele) {
         var num = Number(ele.slice(0, -2));
-        return "".concat((5 / 9) * (num - 32), "\u00B0C");
+        return "".concat(Math.round((5 / 9) * (num - 32)), "\u00B0C");
     });
 }
 function trimTemp(arr) {

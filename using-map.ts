@@ -12,7 +12,7 @@ function upperCasingStates(arr: string[]) {
 function fahrenheitToCelsius(arr: string[]) {
   return arr.map((ele) => {
     const num = Number(ele.slice(0, -2));
-    return `${(5 / 9) * (num - 32)}°C`;
+    return `${Math.round((5 / 9) * (num - 32))}°C`;
   });
 }
 
