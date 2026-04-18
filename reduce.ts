@@ -9,6 +9,7 @@ function fold<T>(
 
   return accumulator;
 }
+
 function foldRight<T>(
   arr: T[],
   func: (x: T, y: T, idx: number, arr: T[]) => T,
