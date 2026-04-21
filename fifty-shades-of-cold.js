@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 import { colors } from "./fifty-shades-of-cold.data.js";
 
 export function generateClasses() {
@@ -15,9 +15,21 @@ export function generateClasses() {
   el.textContent = str;
 }
 
+const coldShades = [
+  "aqua",
+  "blue",
+  "turquoise",
+  "green",
+  "cyan",
+  "navy",
+  "purple",
+];
 export function generateColdShades() {
   const body = document.body;
   for (const color of colors) {
+    if (!coldShades.some((shade) => color.includes(shade))) {
+      continue;
+    }
     const el = document.createElement("div");
     el.classList.add(color);
     el.textContent = color;
@@ -25,14 +37,12 @@ export function generateColdShades() {
   }
 }
 
-
 /**
- * @param {string} shade 
+ * @param {string} shade
  */
 export function choseShade(shade) {
-  const divs = document.querySelectorAll('body > div');
+  const divs = document.querySelectorAll("body > div");
   for (const div of divs) {
-    div.classList.replace(div.classList.item(0), shade)
+    div.classList.replace(div.classList.item(0), shade);
   }
 }
-
