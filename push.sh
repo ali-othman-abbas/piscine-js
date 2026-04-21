@@ -3,13 +3,11 @@ set -e
 
 FILE="$1"
 
-if [[ -z "$FILE" ]]; then
-  echo "Usage: $0 <file.ts>"
-  exit 1
+if [[ -n "$FILE" ]]; then
+	tsc "$FILE"
 fi
 
 # Compile
-tsc "$FILE"
 
 # Git steps
 git add .

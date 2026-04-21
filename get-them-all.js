@@ -1,4 +1,3 @@
-import { people } from "./get-them-all.data.js";
 export const getArchitects = () => [
   [...document.querySelectorAll("a")],
   [...document.querySelectorAll("span")],
