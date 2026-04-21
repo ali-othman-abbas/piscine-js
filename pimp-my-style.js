@@ -16,6 +16,7 @@ export function pimp() {
     last--;
     if (last <= -1) {
       list.remove("unpimp");
+      last++
     }
   }
 }
