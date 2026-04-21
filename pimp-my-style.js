@@ -9,6 +9,7 @@ export function pimp() {
     last++;
     if (last === styles.length) {
       list.add("unpimp");
+      last--;
     }
   } else {
     list.remove(styles[last]);
