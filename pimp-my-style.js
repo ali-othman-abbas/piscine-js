@@ -1,5 +1,6 @@
 import { styles } from "./pimp-my-style.data.js";
 let last = 0;
+console.log(styles)
 export function pimp() {
   const el = document.querySelector("body > button");
   const list = el.classList;
