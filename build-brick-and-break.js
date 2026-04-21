@@ -1,5 +1,5 @@
 export function build(num) {
-  const body = document.querySelector("body");
+  const body = document.body
   let i = 1;
   const id = setInterval(() => {
     if (i > num) {
@@ -20,10 +20,13 @@ export function repair(...ids) {
   console.log(ids)
   for (const id of ids) {
     const ele = document.querySelector(`#${id}`)
+    if (!ele) {
+      continue
+    }
     if (ele.hasAttribute('data-foundation')) {
       ele.dataset.repaired = 'in progress'
     } else {
-      ele.dataset.rapaired = 'true'
+      ele.dataset.repaired = 'true'
     }
   }
 }
