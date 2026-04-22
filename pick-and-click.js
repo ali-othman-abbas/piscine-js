@@ -5,11 +5,9 @@ export function pick() {
   centerDiv.classList.add("hsl");
 
   const hueDiv = document.createElement("div");
-  hueDiv.textContent = `Hue`;
   hueDiv.classList.add("hue", "text");
 
   const luminosityDiv = document.createElement("div");
-  luminosityDiv.textContent = `luminosity`;
   luminosityDiv.classList.add("luminosity", "text");
   
   const succ = document.createElement("div");
@@ -34,8 +32,12 @@ export function pick() {
     body.style.background = hslStr;
     centerDiv.textContent = hslStr;
     centerDiv.style.color = hslStr;
+    
     hueDiv.style.color = hslStr;
+    hueDiv.textContent = `Hue: ${hue}`
+    
     luminosityDiv.style.color = hslStr;
+    luminosityDiv.textContent = `Leminosity: ${luminosity}`
     succ.style.color = centerDiv.textContent;
   });
 
