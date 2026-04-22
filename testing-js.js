@@ -3,6 +3,5 @@
 function main(arr) {
 }
 
-main("hello")
 
 
