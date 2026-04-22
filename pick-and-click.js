@@ -64,6 +64,8 @@ export function pick() {
 
   const lineVert = document.createElementNS(svgNS, "line");
   const lineHoriz = document.createElementNS(svgNS, "line");
+  lineVert.id = 'axisX'
+  lineHoriz.id = 'axisY'
 
   svg.appendChild(lineVert);
   svg.appendChild(lineHoriz);
