@@ -32,9 +32,7 @@ export function moveCircle() {
     let yPos = e.y;
 
     if (box !== null && insideBox(box, { x: xCircle, y: yCircle, radius })) {
-      if (lastCircle.style.background !== "var(--purple)") {
-        lastCircle.style.background = "var(--purple)";
-      }
+      lastCircle.style.background = "var(--purple)";
       const boxPos = box.getBoundingClientRect();
 
       console.log("before: ", xPos, yPos);
