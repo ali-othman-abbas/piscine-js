@@ -5,17 +5,25 @@ let lastCircle = null;
 /**
  * @type {HTMLDivElement}
  */
- 
 let box = null;
+
+let isTrapped = false;
+
 export function createCircle() {
   document.addEventListener("click", (e) => {
+    isTrapped = false;
     const el = document.createElement("div");
     el.classList.add("circle");
     document.body.append(el);
     const radius = el.getBoundingClientRect().width / 2;
     el.style.left = `${e.x - radius}px`;
     el.style.top = `${e.y - radius}px`;
-    el.style.background = "white";
+    if (box !== null && insideBox(box, { x: e.x, y: e.y, radius })) {
+      el.style.background = "var(--purple)";
+      isTrapped = true;
+    } else {
+      el.style.background = "white";
+    }
     lastCircle = el;
   });
 }
@@ -32,9 +40,13 @@ export function moveCircle() {
     let xPos = e.x;
     let yPos = e.y;
 
-    if (box !== null && insideBox(box, { x: xCircle, y: yCircle, radius })) {
-      if (lastCircle.style.background !== "var(--purple)") {
+    if (
+      box !== null &&
+      (insideBox(box, { x: xCircle, y: yCircle, radius }))
+    ) {
+      if (!isTrapped) {
         lastCircle.style.background = "var(--purple)";
+        isTrapped = true
       }
 
       const boxPos = box.getBoundingClientRect();
