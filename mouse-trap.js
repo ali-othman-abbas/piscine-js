@@ -34,9 +34,6 @@ export function moveCircle() {
     const circlePos = lastCircle.getBoundingClientRect();
     const radius = circlePos.width / 2;
 
-    const xCircle = circlePos.left + radius;
-    const yCircle = circlePos.top + radius;
-
     let xPos = e.x;
     let yPos = e.y;
 
