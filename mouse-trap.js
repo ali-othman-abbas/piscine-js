@@ -7,12 +7,7 @@ export function createCircle() {
     el.style.left = `${e.x - radius}px`;
     el.style.top = `${e.y - radius}px`;
     /**@type {HTMLDivElement} */
-    const box = document.querySelector(`.box`);
-    if (box !== null && insideBox(box, { x: e.x, y: e.y, radius })) {
-      el.style.background = "var(--purple)";
-    } else {
-      el.style.background = "white";
-    }
+    el.style.background = "white";
   });
 }
 
