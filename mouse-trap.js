@@ -42,11 +42,11 @@ export function moveCircle() {
 
     if (
       box !== null &&
-      (insideBox(box, { x: xCircle, y: yCircle, radius }))
+      (isTrapped || insideBox(box, { x: xPos, y: yPos, radius }))
     ) {
       if (!isTrapped) {
         lastCircle.style.background = "var(--purple)";
-        isTrapped = true
+        isTrapped = true;
       }
 
       const boxPos = box.getBoundingClientRect();
