@@ -26,10 +26,11 @@ export function moveCircle() {
     let yPos = e.y;
 
     if (box !== null && insideBox(box, { x: xCircle, y: yCircle, radius })) {
-      lastCircle.style.background = "var(--purple)";
-      const boxPos = box.getBoundingClientRect();
+      if (lastCircle.style.background !== 'var(--purple)') {
+        lastCircle.style.background = "var(--purple)";
+      }
 
-      console.log("before: ", xPos, yPos);
+      const boxPos = box.getBoundingClientRect();
       xPos = clamp(boxPos.left + radius + 1, xPos, boxPos.right - radius - 1);
       yPos = clamp(boxPos.top + radius + 1, yPos, boxPos.bottom - radius - 1);
     }
@@ -39,9 +40,9 @@ export function moveCircle() {
 }
 
 export function setBox() {
-  const box = document.createElement("div");
-  box.classList.add("box");
-  document.body.append(box);
+	const box = document.createElement('div');
+	box.classList.add('box');
+	document.body.append(box);
 }
 
 /**
