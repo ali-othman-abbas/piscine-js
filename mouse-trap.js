@@ -36,8 +36,8 @@ export function moveCircle() {
       const boxPos = box.getBoundingClientRect();
 
       console.log("before: ", xPos, yPos);
-      xPos = clamp(boxPos.left + radius, xPos, boxPos.right - radius);
-      yPos = clamp(boxPos.top + radius, yPos, boxPos.bottom - radius);
+      xPos = clamp(boxPos.left + radius + 1, xPos, boxPos.right - radius - 1);
+      yPos = clamp(boxPos.top + radius + 1, yPos, boxPos.bottom - radius - 1);
     }
     lastCircle.style.left = `${xPos - radius}px`;
     lastCircle.style.top = `${yPos - radius}px`;
@@ -84,9 +84,9 @@ function insideBox(box, { x, y, radius }) {
 
   const boxPos = box.getBoundingClientRect();
   return (
-    boxPos.left <= x - radius &&
-    boxPos.right >= x + radius &&
-    boxPos.top <= y - radius &&
-    boxPos.bottom >= y + radius
+    boxPos.left < x - radius &&
+    boxPos.right > x + radius &&
+    boxPos.top < y - radius &&
+    boxPos.bottom > y + radius
   );
 }
