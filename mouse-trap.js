@@ -6,7 +6,6 @@ export function createCircle() {
     const radius = el.getBoundingClientRect().width / 2;
     el.style.left = `${e.x - radius}px`;
     el.style.top = `${e.y - radius}px`;
-    /**@type {HTMLDivElement} */
     el.style.background = "white";
   });
 }
