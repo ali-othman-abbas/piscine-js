@@ -76,7 +76,7 @@ export function pick() {
     lineVert.setAttribute("y1", `0`);
     lineVert.setAttribute("y2", `${window.innerHeight}`);
 
-    lineHoriz.setAttribute("x1", `${0}`);
+    lineHoriz.setAttribute("x1", `0`);
     lineHoriz.setAttribute("x2", `${window.innerWidth}`);
     lineHoriz.setAttribute("y1", `${e.y}`);
     lineHoriz.setAttribute("y2", `${e.y}`);
