@@ -9,9 +9,9 @@ export function createCircle() {
     /**@type {HTMLDivElement} */
     const box = document.querySelector(`.box`);
     if (box !== null && insideBox(box, { x: e.x, y: e.y, radius })) {
-      el.style.backgroundColor = "var(--purple)";
+      el.style.background = "var(--purple)";
     } else {
-      el.style.backgroundColor = "white";
+      el.style.background = "white";
     }
   });
 }
