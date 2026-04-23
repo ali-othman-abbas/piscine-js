@@ -83,7 +83,7 @@ function totalCalories(obj) {
   console.log(obj)
   return reduceEntries(
     obj,
-    (accum, [k, v]) => Number(accum + nutritionDB[k]["calories"] * v),
+    (accum, [k, v]) => Number((accum + nutritionDB[k]["calories"] * v).toFixed(2)),
     0,
   );
 }
