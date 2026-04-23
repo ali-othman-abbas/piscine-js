@@ -5,8 +5,12 @@
  */
 function pick(obj, ...strs) {
   const result = {}
-  const set = new Set(...strs)
-  console.log(set)
+  let set = null
+  if (strs.length === 1) {
+    set = new Set(strs[0])
+  } else {
+    set = new Set(...strs)
+  }
   for (const k in obj) {
     if (set.has(k)) {
       result[k] = obj[k]
@@ -24,7 +28,12 @@ function pick(obj, ...strs) {
  */
 function omit(obj, ...strs) {
   const result = {}
-  const set = new Set(...strs)
+  let set = null
+  if (strs.length === 1) {
+    set = new Set(strs[0])
+  } else {
+    set = new Set(...strs)
+  }
   for (const k in obj) {
     if (!set.has(k)) {
       result[k] = obj[k]
