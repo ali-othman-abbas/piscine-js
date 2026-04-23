@@ -19,9 +19,7 @@ function defaultCurry(obj1) {
      */
     const result = { ...obj1 };
     for (const k in obj2) {
-      if (k in result) {
-        result.k = obj2.k;
-      }
+      result[k] = obj2[k];
     }
     return result;
   };
