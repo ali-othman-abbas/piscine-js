@@ -63,7 +63,7 @@ function reduceScore(personal, start) {
 }
 
 function filterForce(personal) {
-  return filterCurry(([_, v]) => v.shootingScore >= 80)(personal);
+  return filterCurry(([_, v]) => v.shootingScore >= 80 && v.isForceUser)(personal);
 }
 
 function mapAverage(personal) {
