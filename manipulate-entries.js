@@ -79,27 +79,32 @@ function reduceEntries(obj, func, accum) {
 }
 
 function totalCalories(obj) {
-  obj = Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, v/100]))
+  obj = Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, v / 100]));
   return reduceEntries(
     obj,
-    (accum, [k, v]) => Math.round((accum + nutritionDB[k]["calories"] * v)*10)/10,
+    (accum, [k, v]) =>
+      Math.round((accum + nutritionDB[k]["calories"] * v) * 10) / 10,
     0,
   );
 }
 
 function lowCarbs(obj) {
-  return filterEntries(obj, ([k, v]) => nutritionDB[k]["carbs"] * v/100 < 50);
+  return filterEntries(
+    obj,
+    ([k, v]) => (nutritionDB[k]["carbs"] * v) / 100 < 50,
+  );
 }
 
 function cartTotal(obj) {
-  obj = Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, v/100]))
+  obj = Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, v / 100]));
   return mapEntries(obj, ([k, v]) => [
     k,
-    mapEntries(nutritionDB[k], ([_k, _v]) => [_k, Math.round(_v * v * 10)/10]),
+    mapEntries(nutritionDB[k], ([_k, _v]) => [
+      _k,
+      Math.round(_v * v * 10) / 10,
+    ]),
   ]);
 }
-
-
 
 // const groceriesCart = { orange: 500, oil: 20, sugar: 480 }
 
