@@ -88,8 +88,7 @@ function totalCalories(obj) {
 }
 
 function lowCarbs(obj) {
-  obj = Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, v/100]))
-  return filterEntries(obj, ([k, v]) => nutritionDB[k]["carbs"] * v < 50);
+  return filterEntries(obj, ([k, v]) => nutritionDB[k]["carbs"] * v/100 < 50);
 }
 
 function cartTotal(obj) {
@@ -100,7 +99,9 @@ function cartTotal(obj) {
   ]);
 }
 
-// const groceriesCart = { orange: 500, oil: 20, sugar: 480 }
+
+
+// const groceriesCart = { oil: 500, onion: 230 }
 
 // console.log('Total calories:')
 // console.log(totalCalories(groceriesCart))
