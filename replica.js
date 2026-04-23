@@ -5,7 +5,7 @@ function deepCopy(obj) {
   }
   const copy = {};
   for (const k in obj) {
-    if (Array.isArray(obj[k]) || obj[k]?.constructor === "Object") {
+    if (Array.isArray(obj[k]) || obj[k]?.constructor?.name === "Object") {
       copy[k] = deepCopy(obj[k]);
     } else {
       copy[k] = obj[k];
@@ -24,11 +24,11 @@ function replica(...obj) {
     for (const k in obj2) {
       if (
         k in obj1 &&
-        obj1[k].constructor === "Object" &&
-        obj2[k].constructor === "Object"
+        obj1[k]?.constructor?.name === "Object" &&
+        obj2[k]?.constructor?.name === "Object"
       ) {
         deepAssign(obj1[k], obj2[k]);
-      } else if (k in obj1 && obj2[k].constructor === "Object") {
+      } else if (k in obj1 && obj2[k]?.constructor?.name === "Object") {
         const copy = {};
         deepAssign(copy, obj2[k]);
         obj1[k] = copy;
