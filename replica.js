@@ -1,39 +1,49 @@
-
 function deepCopy(obj) {
-  let isArr = false
+  let isArr = false;
   if (Array.isArray(obj)) {
-    isArr = true
+    isArr = true;
   }
-  const copy = {}
+  const copy = {};
   for (const k in obj) {
-    if (Array.isArray(obj[k]) || obj[k]?.constructor === 'Object') {
-      copy[k] = deepCopy(obj[k])
+    if (Array.isArray(obj[k]) || obj[k]?.constructor === "Object") {
+      copy[k] = deepCopy(obj[k]);
     } else {
-      copy[k] = obj[k]
+      copy[k] = obj[k];
     }
   }
 
   if (isArr) {
-    return Object.entries(copy).map(([_, v]) => v)
+    return Object.entries(copy).map(([_, v]) => v);
   }
 
-  return copy
+  return copy;
 }
 
 function replica(...obj) {
-  if (obj.length === 0) {
-    return {}
+  function deepAssign(obj1, obj2) {
+    for (const k in obj2) {
+      if (
+        k in obj1 &&
+        obj1[k].constructor === "Object" &&
+        obj2[k].constructor === "Object"
+      ) {
+        deepAssign(obj1[k], obj2[k]);
+      } else if (k in obj1 && obj2[k].constructor === "Object") {
+        const copy = {};
+        deepAssign(copy, obj2[k]);
+        obj1[k] = copy;
+      } else if (Array.isArray(obj2[k])) {
+        obj1[k] = deepCopy(obj2[k]);
+      } else {
+        obj1[k] = obj2[k];
+      }
+    }
   }
-  if (obj.length === 1) {
-    return deepCopy(obj[0])
-  }
-  const mid = Math.floor(obj.length / 2)
-  const h1 = replica(...obj.slice(0, mid))
-  const h2 = replica(...obj.slice(mid))
-  for (const k in h2) {
-    h1[k] = h2[k]
+
+  let result = {};
+  for (let i = 0; i < obj.length; i++) {
+    deepAssign(result, obj[i]);
   }
   
-  return h1
+  return result
 }
-
