@@ -4,14 +4,15 @@
  * @return {{ [x: string]: any; }}
  */
 function pick(obj, ...strs) {
+  const result = {}
   const set = new Set(strs)
   for (const k in obj) {
-    if (!set.has(k)) {
-      delete obj[k]
+    if (set.has(k)) {
+      result[k] = obj[k]
     }
   }
   
-  return obj
+  return result
 }
 
 /**
@@ -20,12 +21,13 @@ function pick(obj, ...strs) {
  * @return {{ [x: string]: any; }}
  */
 function omit(obj, ...strs) {
+  const result = {}
   const set = new Set(strs)
   for (const k in obj) {
-    if (set.has(k)) {
-      delete obj[k]
+    if (!set.has(k)) {
+      result[k] = obj[k]
     }
   }
   
-  return obj
+  return result
 }
