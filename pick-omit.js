@@ -8,9 +8,8 @@ function pick(obj, strs) {
   let set = null
   if (typeof strs === 'string') {
     set = new Set()
-    set.add(strs)
   } else {
-    set = new Set(...strs)
+    set = new Set(strs)
   }
   for (const k in obj) {
     if (set.has(k)) {
@@ -31,9 +30,8 @@ function omit(obj, ...strs) {
   let set = null
   if (typeof strs === 'string') {
     set = new Set()
-    set.add(strs)
   } else {
-    set = new Set(...strs)
+    set = new Set(strs)
   }
   for (const k in obj) {
     if (!set.has(k)) {
