@@ -1,20 +1,20 @@
 function deepCopy(obj) {
-  let isArr = false
+  let isArr = false;
   if (Array.isArray(obj)) {
-    isArr = true
+    isArr = true;
   }
-  const copy = {}
+  const copy = {};
   for (const k in obj) {
-    if (Array.isArray(obj[k]) || obj[k]?.constructor === 'Object') {
-      copy[k] = deepCopy(obj[k])
+    if (Array.isArray(obj[k]) || obj[k]?.constructor?.name === "Object") {
+      copy[k] = deepCopy(obj[k]);
     } else {
-      copy[k] = obj[k]
+      copy[k] = obj[k];
     }
   }
-  
+
   if (isArr) {
-    return Object.entries(copy).map(([_, v]) => v)
+    return Object.entries(copy).map(([_, v]) => v);
   }
-  
-  return copy
+
+  return copy;
 }
