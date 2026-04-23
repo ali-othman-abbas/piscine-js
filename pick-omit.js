@@ -1,14 +1,17 @@
 /**
  * @param {{ [x: string]: any; }} obj
- * @param {string[]} strs
+ * @param {string | string[]} strs
  * @return {{ [x: string]: any; }}
  */
-function pick(obj, ...strs) {
+function pick(obj, strs) {
   const result = {}
-  if (strs.length === 1) {
-    strs = [strs[0]]
+  let set = null
+  if (typeof strs === 'string') {
+    set = new Set()
+    set.add(strs)
+  } else {
+    set = new Set(...strs)
   }
-  const set = new Set(strs)
   for (const k in obj) {
     if (set.has(k)) {
       result[k] = obj[k]
@@ -18,7 +21,6 @@ function pick(obj, ...strs) {
   return result
 }
 
-
 /**
  * @param {{ [x: string]: any; }} obj
  * @param {string[]} strs
@@ -26,10 +28,13 @@ function pick(obj, ...strs) {
  */
 function omit(obj, ...strs) {
   const result = {}
-  if (strs.length === 1) {
-    strs = [strs[0]]
+  let set = null
+  if (typeof strs === 'string') {
+    set = new Set()
+    set.add(strs)
+  } else {
+    set = new Set(...strs)
   }
-  const set = new Set(strs)
   for (const k in obj) {
     if (!set.has(k)) {
       result[k] = obj[k]
