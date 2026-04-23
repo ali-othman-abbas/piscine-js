@@ -12,7 +12,7 @@ function pick(obj, strs) {
   } else {
     set = new Set(strs)
   }
-  for (const k in obj) {
+  for (const k in Object.keys(obj)) {
     if (set.has(k)) {
       result[k] = obj[k]
     }
@@ -35,7 +35,7 @@ function omit(obj, strs) {
   } else {
     set = new Set(strs)
   }
-  for (const k in obj) {
+  for (const k in Object.keys(obj)) {
     if (!set.has(k)) {
       result[k] = obj[k]
     }
