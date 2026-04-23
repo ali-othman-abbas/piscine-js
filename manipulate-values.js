@@ -1,4 +1,3 @@
-
 /**
  * @template T
  * @param {Record<string, T>} obj
@@ -23,11 +22,12 @@ function mapValues(obj, func) {
  * @template T
  * @param {Record<string, T>} obj
  * @param {(prev: T, curr: T) => T} func
+ * @param {T?} accumulator
  * @param T
  */
-function reduceValues(obj, func) {
-  return Object.entries(obj).reduce(([_, accum], [__, curr]) => [
-    "",
-    func(accum, curr),
-  ])[1];
+function reduceValues(obj, func, accumulator) {
+  return Object.entries(obj).reduce(
+    ([_, accum], [__, curr]) => ["", func(accum, curr)],
+    accumulator !== undefined ? ["", accumulator] : undefined,
+  )[1];
 }
