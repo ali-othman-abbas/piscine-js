@@ -95,13 +95,13 @@ function cartTotal(obj) {
   obj = Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, v/100]))
   return mapEntries(obj, ([k, v]) => [
     k,
-    mapEntries(nutritionDB[k], ([_k, _v]) => [_k, _v * v]),
+    mapEntries(nutritionDB[k], ([_k, _v]) => [_k, Math.round(_v * v * 10)/10]),
   ]);
 }
 
 
 
-// const groceriesCart = { oil: 500, onion: 230 }
+// const groceriesCart = { orange: 500, oil: 20, sugar: 480 }
 
 // console.log('Total calories:')
 // console.log(totalCalories(groceriesCart))
