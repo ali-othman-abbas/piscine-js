@@ -5,12 +5,10 @@
  */
 function pick(obj, ...strs) {
   const result = {}
-  let set = null
   if (strs.length === 1) {
-    set = new Set(strs[0])
-  } else {
-    set = new Set(...strs)
+    strs = [strs[0]]
   }
+  const set = new Set(strs)
   for (const k in obj) {
     if (set.has(k)) {
       result[k] = obj[k]
@@ -28,12 +26,10 @@ function pick(obj, ...strs) {
  */
 function omit(obj, ...strs) {
   const result = {}
-  let set = null
   if (strs.length === 1) {
-    set = new Set(strs[0])
-  } else {
-    set = new Set(...strs)
+    strs = [strs[0]]
   }
+  const set = new Set(strs)
   for (const k in obj) {
     if (!set.has(k)) {
       result[k] = obj[k]
