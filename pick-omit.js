@@ -26,7 +26,7 @@ function pick(obj, strs) {
  * @param {string[]} strs
  * @return {{ [x: string]: any; }}
  */
-function omit(obj, ...strs) {
+function omit(obj, strs) {
   const result = {}
   let set = null
   if (typeof strs === 'string') {
