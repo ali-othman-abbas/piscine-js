@@ -82,7 +82,7 @@ function totalCalories(obj) {
   obj = Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, v/100]))
   return reduceEntries(
     obj,
-    (accum, [k, v]) => accum + nutritionDB[k]["calories"] * v,
+    (accum, [k, v]) => Math.round((accum + nutritionDB[k]["calories"] * v)*10)/10,
     0,
   );
 }
