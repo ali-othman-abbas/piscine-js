@@ -8,6 +8,7 @@ function pick(obj, strs) {
   let set = null
   if (typeof strs === 'string') {
     set = new Set()
+    set.add(strs)
   } else {
     set = new Set(strs)
   }
@@ -30,6 +31,7 @@ function omit(obj, ...strs) {
   let set = null
   if (typeof strs === 'string') {
     set = new Set()
+    set.add(strs)
   } else {
     set = new Set(strs)
   }
