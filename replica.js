@@ -12,19 +12,27 @@ function deepCopy(obj) {
       copy[k] = obj[k]
     }
   }
-  
+
   if (isArr) {
     return Object.entries(copy).map(([_, v]) => v)
   }
-  
+
   return copy
 }
 
 function replica(...obj) {
-  let rep = {}
-  for (let i = 0; i < obj.length; i++) {
-    rep = {...rep, ...deepCopy(obj[i])}
+  if (obj.length === 0) {
+    return {}
+  }
+  if (obj.length === 1) {
+    return deepCopy(obj[0])
+  }
+  const mid = Math.floor(obj.length / 2)
+  const h1 = obj.slice(0, mid)
+  const h2 = obj.slice(mid)
+  for (const k in h2) {
+    h1[k] = h2[k]
   }
   
-  return rep
+  return h1
 }
