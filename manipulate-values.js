@@ -26,8 +26,15 @@ function mapValues(obj, func) {
  * @param T
  */
 function reduceValues(obj, func, accumulator) {
-  return Object.entries(obj).reduce(
-    ([_, accum], [__, curr]) => ["", func(accum, curr)],
-    accumulator !== undefined ? ["", accumulator] : undefined,
-  )[1];
+  if (accumulator === undefined) {
+    return Object.entries(obj).reduce(([_, accum], [__, curr]) => [
+      "",
+      func(accum, curr),
+    ])[1];
+  } else {
+    return Object.entries(obj).reduce(
+      ([_, accum], [__, curr]) => ["", func(accum, curr)],
+      ["", accumulator],
+    )[1];
+  }
 }
