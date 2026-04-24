@@ -6,15 +6,15 @@
 function neuron(sentences) {
   const extractRE = /^(\w+):(.*)-\s*Response:(.*)$/
   const result = {}
-  for (const s in sentences) {
-    const groups = s.match(extractRE).slice(1)
-    const command = groups[0].toLowerCase()
+  for (const s of sentences) {
+    const groups = s.match(extractRE)
+    const command = groups[1].toLowerCase()
     const commandSingular = command.slice(0, -1)
-    const commandArg = groups[1].trim()
+    const commandArg = groups[2].trim()
     const commandArgProp = commandArg.toLowerCase()
       .replace(/\s/g, '_')
       .replace(/\W/g, '')
-    const response = groups[2].trim()
+    const response = groups[3].trim()
     
     if (!(command in result)) {
       result[command] = {}
@@ -30,4 +30,3 @@ function neuron(sentences) {
   
   return result
 }
-
