@@ -12,7 +12,9 @@ function neuron(sentences) {
       const command = groups[0].toLowerCase()
       const commandSingular = command.slice(0, -1)
       const commandArg = groups[1].trim()
-      const commandArgProp = commandArg.toLowerCase().replace(/ /g, '_')
+      const commandArgProp = commandArg.toLowerCase()
+        .replace(/\s/g, '_')
+        .replace(/\W/g, '')
       const response = groups[2].trim()
       
       if (!(command in result)) {
@@ -31,5 +33,3 @@ function neuron(sentences) {
   return result
 }
 
-const result = neuron(['Orders: shutdown please! - Response: no!'])
-console.log(result)
