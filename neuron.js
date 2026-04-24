@@ -30,3 +30,6 @@ function neuron(sentences) {
   
   return result
 }
+
+const result = neuron(['Orders: shutdown please! - Response: no!'])
+console.log(result)
