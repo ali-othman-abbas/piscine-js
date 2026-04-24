@@ -11,12 +11,11 @@ function flags(obj) {
   }
   
   const discriptions = []
-  if (helpArr !== null) {
-    for (const cmd of helpArr) {
-      
-      discriptions.push(`-${cmd[0].toLowerCase()}, --${cmd}: ${obj[cmd]}`)
-    }
+  
+  for (const cmd of helpArr ?? obj) {
+    discriptions.push(`-${cmd[0].toLowerCase()}, --${cmd}: ${obj[cmd]}`)
   }
+  
   
   return {
     alias,
