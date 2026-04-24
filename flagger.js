@@ -11,9 +11,11 @@ function flags(obj) {
   }
   
   const discriptions = []
-  for (const cmd of helpArr) {
-    
-    discriptions.push(`-${cmd[0].toLowerCase()}, --${cmd}: ${obj[cmd]}`)
+  if (helpArr !== null) {
+    for (const cmd of helpArr) {
+      
+      discriptions.push(`-${cmd[0].toLowerCase()}, --${cmd}: ${obj[cmd]}`)
+    }
   }
   
   return {
