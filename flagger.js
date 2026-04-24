@@ -1,3 +1,8 @@
+/**
+ * 
+ * @param {Record<string, string>} obj 
+ * @returns 
+ */
 function flags(obj) {
   const alias = {h: 'help'}
   let helpArr = null
@@ -12,7 +17,7 @@ function flags(obj) {
   
   const discriptions = []
   
-  for (const cmd of helpArr ?? obj) {
+  for (const cmd of (helpArr ?? Object.keys(obj))) {
     discriptions.push(`-${cmd[0].toLowerCase()}, --${cmd}: ${obj[cmd]}`)
   }
   
