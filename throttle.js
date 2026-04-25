@@ -22,37 +22,42 @@ function throttle(func, wait) {
   };
 }
 
-function opThrottle(func, wait, {trailing = true, leading = true}) {
+function opThrottle(func, wait, {trailing, leading}) {
   let lastArgs = null;
   let firstCall = true
   if (!leading) {
     firstCall = false
   }
+  let setTimer = true
   let callInWindow = false
-  let timeout = null;
   return (...args) => {
     lastArgs = args;
     if (!firstCall && !callInWindow) {
       callInWindow = true
     }
     if (firstCall) {
-      func(...lastArgs)
+      if (setTimer || !leading || !trailing) {
+        func(...lastArgs)
+      }
       firstCall = false
       if (leading) {
         callInWindow = true
       }
     }
-    timeout = setTimeout(() => {
-      if (callInWindow) {
-        if (trailing) {
-          func(...lastArgs)
+    if (setTimer) {
+      setTimer = false
+      const timeout = setTimeout(() => {
+        if (callInWindow) {
+          if (trailing) {
+            func(...lastArgs)
+          }
+          timeout.refresh()
+          callInWindow = false
+          if (leading) {
+            firstCall = true
+          }
         }
-        timeout.refresh()
-        callInWindow = false
-        if (leading) {
-          firstCall = true
-        }
-      }
-    }, wait)
+      }, wait)
+    }
   };
 }
