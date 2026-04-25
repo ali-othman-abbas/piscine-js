@@ -25,6 +25,9 @@ function throttle(func, wait) {
 function opThrottle(func, wait, {trailing = true, leading = true}) {
   let lastArgs = null;
   let firstCall = true
+  if (!leading) {
+    firstCall = false
+  }
   let callInWindow = false
   let timeout = null;
   return (...args) => {
