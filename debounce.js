@@ -1,8 +1,8 @@
 /**
  * 
- * @param {(arg: any[]) => void} func 
+ * @param {(...arg: any) => void} func 
  * @param {number} wait 
- * @returns {(arg: any[]) => void}
+ * @returns {(...arg: any) => void}
  */
  
 function debounce(func, wait) {
@@ -13,11 +13,23 @@ function debounce(func, wait) {
   return (...arg) => {
     clearTimeout(timeout)
     timeout = setTimeout(
-      () => func(arg)
+      () => func(...arg),
+      wait
     )
   };
 }
 
+const debounced = debounce((a, b) => {
+  console.log(a + b)
+}, 500)
+
+
+/**
+ * 
+ * @param {(...arg: any) => void} func 
+ * @param {number} wait 
+ * @returns {(...arg: any) => void}
+ */
 function opDebounce(func, wait) {
   let fire = true
   const timeOutSetter = () =>
@@ -33,7 +45,7 @@ function opDebounce(func, wait) {
       timeout = timeOutSetter()
     }
     if (fire) {
-      func(args)
+      func(...args)
       fire = false
     }
     timeout.refresh()
