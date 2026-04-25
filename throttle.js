@@ -57,13 +57,13 @@ function opThrottle(func, wait, {trailing = true, leading = true}) {
   };
 }
 
-// const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-// const result = opThrottle((i) => console.log(i), 400, {leading: false, trailing: true})
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+const result = opThrottle((i) => console.log(i), 26, {leading: false, trailing: true})
 
-// async function hello() {
-//   result(26)
+async function hello() {
+  result(26)
+  await sleep(16)
+  result(27)
   
-//   await sleep(500)
-//   result(30)
-// }
-// hello()
+}
+hello()
