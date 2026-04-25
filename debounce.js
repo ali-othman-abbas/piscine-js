@@ -30,7 +30,7 @@ const debounced = debounce((a, b) => {
  * @param {number} wait 
  * @returns {(...arg: any) => void}
  */
- function debounceLeading(func, wait) {
+ function opDebounce(func, wait) {
    let timeout = null;
  
    return (...args) => {
