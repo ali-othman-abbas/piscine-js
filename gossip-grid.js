@@ -55,6 +55,7 @@ function buildUI() {
 
 function buildForm() {
   const form = document.createElement("form");
+  form.classList.add('gossip')
   const textArea = document.createElement("textarea");
   const button = document.createElement("button");
   button.textContent = "Share gossip!";
@@ -72,19 +73,16 @@ function buildGrid() {
     grid.append(div);
   }
 
-  const formWrapper = document.createElement("div");
-  formWrapper.classList.add("gossip");
   const form = buildForm();
-  formWrapper.append(form);
-  grid.prepend(formWrapper);
+  grid.prepend(form);
 
   return grid;
 }
 
 function addEvents() {
-  const wrapper = document.querySelector(".gossip:first-child");
-  const button = wrapper.querySelector("button");
-  const textArea = wrapper.querySelector("textarea");
+  const form = document.querySelector("form.gossip");
+  const button = form.querySelector("button");
+  const textArea = form.querySelector("textarea");
   /** @type {HTMLInputElement} */
   const widthSlider = document.querySelector("#width");
   /** @type {HTMLInputElement}*/
@@ -110,7 +108,7 @@ function addEvents() {
     const div = document.createElement("div");
     div.textContent = textArea.value;
     div.classList.add("gossip");
-    wrapper.insertAdjacentElement("afterend", div);
+    form.insertAdjacentElement("afterend", div);
     textArea.value = "";
     allGossips = document.querySelectorAll(".gossip");
     widthSliderFn();
