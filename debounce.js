@@ -30,8 +30,8 @@ const debounced = debounce((a, b) => {
  * @param {number} wait 
  * @returns {(...arg: any) => void}
  */
-function opDebounce(func, wait, {leading = false}) {
-  if (!leading) {
+function opDebounce(func, wait, options = {}) {
+  if (options.leading === true) {
     return debounce(func, wait)
   }
   let fire = true
