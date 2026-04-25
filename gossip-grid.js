@@ -72,10 +72,10 @@ function buildGrid() {
     div.textContent = g;
     grid.append(div);
   }
-  const form = buildForm(grid);
 
   const formWrapper = document.createElement("div");
   formWrapper.classList.add("gossip");
+  const form = buildForm(formWrapper);
   formWrapper.append(form);
   grid.prepend(formWrapper);
 
@@ -83,10 +83,10 @@ function buildGrid() {
 }
 
 /**
- * @param {HTMLElement} grid
+ * @param {HTMLElement} wrapper
  * @return {HTMLElement}
  */
-function buildForm(grid) {
+function buildForm(wrapper) {
   const form = document.createElement("form");
   form.classList.add("gossip");
   const textArea = document.createElement("textarea");
@@ -98,7 +98,7 @@ function buildForm(grid) {
     const div = document.createElement("div");
     div.textContent = textArea.value;
     div.classList.add("gossip");
-    grid.append(div);
+    wrapper.insertAdjacentElement('afterend', div)
     textArea.value = ''
   });
   form.append(textArea, button);
