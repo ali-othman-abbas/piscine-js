@@ -1,53 +1,49 @@
 /**
- * 
- * @param {(...arg: any) => void} func 
- * @param {number} wait 
+ *
+ * @param {(...arg: any) => void} func
+ * @param {number} wait
  * @returns {(...arg: any) => void}
  */
- 
+
 function debounce(func, wait) {
   /**
    * @type {NodeJS.Timeout}
    */
-  let timeout = null
+  let timeout = null;
   return (...arg) => {
-    clearTimeout(timeout)
-    timeout = setTimeout(
-      () => func(...arg),
-      wait
-    )
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func(...arg), wait);
   };
 }
 
 const debounced = debounce((a, b) => {
-  console.log(a + b)
-}, 500)
-
+  console.log(a + b);
+}, 500);
 
 /**
- * 
- * @param {(...arg: any) => void} func 
- * @param {number} wait 
+ *
+ * @param {(...arg: any) => void} func
+ * @param {number} wait
  * @returns {(...arg: any) => void}
  */
 function opDebounce(func, wait) {
-  let fire = true
+  let fire = true;
   const timeOutSetter = () =>
     setTimeout(() => {
-      fire = true
+      fire = true;
     }, wait);
   /**
    * @type {NodeJS.Timeout}
    */
-  let timeout = null
+  let timeout = null;
   return (...args) => {
     if (timeout === null) {
-      timeout = timeOutSetter()
+      timeout = timeOutSetter();
     }
     if (fire) {
-      func(...args)
-      fire = false
+      func(...args);
+      fire = false;
+      timeout.refresh();
     }
-    timeout.refresh()
   };
 }
