@@ -19,6 +19,9 @@ function debounce(func, wait) {
   };
 }
 
+const debounced = debounce((a, b) => {
+  console.log(a + b)
+}, 500)
 
 
 /**
@@ -27,18 +30,16 @@ function debounce(func, wait) {
  * @param {number} wait 
  * @returns {(...arg: any) => void}
  */
- function opDebounce(func, wait) {
+ function debounceLeading(func, wait) {
    let timeout = null;
  
    return (...args) => {
      const shouldCallNow = timeout === null;
  
-     if (timeout !== null) {
-       clearTimeout(timeout);
-     }
+     clearTimeout(timeout);
  
      timeout = setTimeout(() => {
-       timeout = null; // allow next leading call
+       timeout = null; // reset after inactivity
      }, wait);
  
      if (shouldCallNow) {
