@@ -31,33 +31,21 @@ const debounced = debounce((a, b) => {
  * @returns {(...arg: any) => void}
  */
  function opDebounce(func, wait) {
-   let timeout = null
-   let lastArgs = null
-   let calledAgain = false
+   let timeout = setTimeout(() => {
+     timeout = null
+   }, wait)
  
    return (...args) => {
-     lastArgs = args
- 
      const shouldCallNow = timeout === null
- 
-     if (shouldCallNow) {
-       func(...args)
-       calledAgain = false
-     } else {
-       calledAgain = true
-     }
  
      clearTimeout(timeout)
  
      timeout = setTimeout(() => {
        timeout = null
- 
-       if (calledAgain) {
-         func(...lastArgs)
-       }
- 
-       lastArgs = null
-       calledAgain = false
      }, wait)
+ 
+     if (shouldCallNow) {
+       func(...args)
+     }
    }
  }
