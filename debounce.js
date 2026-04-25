@@ -30,22 +30,27 @@ const debounced = debounce((a, b) => {
  * @param {number} wait 
  * @returns {(...arg: any) => void}
  */
- function opDebounce(func, wait) {
-   let timeout = setTimeout(() => {
-     timeout = null
-   }, wait)
- 
-   return (...args) => {
-     const shouldCallNow = timeout === null
- 
-     clearTimeout(timeout)
- 
-     timeout = setTimeout(() => {
-       timeout = null
-     }, wait)
- 
-     if (shouldCallNow) {
-       func(...args)
-     }
-   }
- }
+function opDebounce(func, wait, {leading = false}) {
+  if (!leading) {
+    return debounce(func, wait)
+  }
+  let fire = true
+  const timeOutSetter = () =>
+    setTimeout(() => {
+      fire = true
+    }, wait);
+  /**
+   * @type {NodeJS.Timeout}
+   */
+  let timeout = null
+  return (...args) => {
+    if (timeout === null) {
+      timeout = timeOutSetter()
+    }
+    if (fire) {
+      func(...args)
+      fire = false
+    }
+    timeout.refresh()
+  };
+}
