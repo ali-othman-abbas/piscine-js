@@ -1,4 +1,3 @@
-const _  = require('lodash')
 function throttle(func, wait) {
   let lastArgs = null;
   let firstCallInWindow = true
@@ -34,7 +33,7 @@ function opThrottle(func, wait, {trailing = true, leading = true}) {
       if (leading) {
         func(...lastArgs)
       } else if (trailing) {
-        firstCallInWindow =false
+        firstCallInWindow = false
       }
       timeout = setTimeout(() => {
         if (!firstCallInWindow) {
