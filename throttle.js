@@ -1,21 +1,25 @@
 function throttle(func, wait) {
   let lastArgs = null;
-  let firstCallInWindow = true
+  let firstCall = true
+  let callInWindow = false
   let timeout = null;
   return (...args) => {
     lastArgs = args;
-    if (firstCallInWindow && timeout) {
-      firstCallInWindow = false
+    if (!firstCall && !callInWindow) {
+      callInWindow = true
     }
-    if (firstCallInWindow) {
+    if (firstCall) {
       func(...lastArgs)
+      firstCall = false
+    }
+    if (timeout === null) {
       timeout = setTimeout(() => {
-        if (!firstCallInWindow) {
-          func(...lastArgs);
+        if (callInWindow) {
+          func(...args)
+          timeout.refresh()
+          callInWindow = false
         }
-        timeout = null;
-        firstCallInWindow = true
-      }, wait);
+      }, wait)
     }
   };
 }
