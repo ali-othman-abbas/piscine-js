@@ -1,31 +1,48 @@
+
 function throttle(func, wait) {
   let lastArgs = null;
+  let firstCallInWindow = true
   let timeout = null;
   return (...args) => {
     lastArgs = args;
-    if (timeout === null) {
+    if (firstCallInWindow && timeout) {
+      firstCallInWindow = false
+    }
+    if (firstCallInWindow) {
+      func(...lastArgs)
       timeout = setTimeout(() => {
-        func(...lastArgs);
-        timeout = null;
+        if (!firstCallInWindow) {
+          func(...lastArgs);
+          timeout = null;
+          firstCallInWindow = true
+        }
       }, wait);
     }
   };
 }
 
-function opThrottle(func, wait, options) {
+
+function opThrottle(func, wait, {trailing = true, leading = true}) {
   let lastArgs = null;
+  let firstCallInWindow = true
   let timeout = null;
   return (...args) => {
     lastArgs = args;
-    if (timeout === null) {
-      if (options.leading) {
-        func(...lastArgs);
+    if (firstCallInWindow && timeout) {
+      firstCallInWindow = false
+    }
+    if (firstCallInWindow) {
+      if (leading) {
+        func(...lastArgs)
       }
       timeout = setTimeout(() => {
-        if (options.trailing) {
-          func(...lastArgs);
+        if (!firstCallInWindow || trailing) {
+          if (trailing) {
+            func(...lastArgs);
+          }
+          timeout = null;
+          firstCallInWindow = true
         }
-        timeout = null;
       }, wait);
     }
   };
