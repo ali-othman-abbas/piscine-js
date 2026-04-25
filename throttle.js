@@ -12,15 +12,13 @@ function throttle(func, wait) {
       func(...lastArgs)
       firstCall = false
     }
-    if (timeout === null) {
-      timeout = setTimeout(() => {
-        if (callInWindow) {
-          func(...args)
-          timeout.refresh()
-          callInWindow = false
-        }
-      }, wait)
-    }
+    timeout = setTimeout(() => {
+      if (callInWindow) {
+        func(...args)
+        timeout.refresh()
+        callInWindow = false
+      }
+    }, wait)
   };
 }
 
