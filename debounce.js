@@ -39,7 +39,7 @@ const debounced = debounce((a, b) => {
      clearTimeout(timeout);
  
      timeout = setTimeout(() => {
-       timeout = null; // reset after inactivity
+       timeout = null;
      }, wait);
  
      if (shouldCallNow) {
