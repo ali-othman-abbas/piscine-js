@@ -14,7 +14,7 @@ function throttle(func, wait) {
     }
     timeout = setTimeout(() => {
       if (callInWindow) {
-        func(...args)
+        func(...lastArgs)
         timeout.refresh()
         callInWindow = false
       }
@@ -45,7 +45,7 @@ function opThrottle(func, wait, {trailing = true, leading = true}) {
     timeout = setTimeout(() => {
       if (callInWindow) {
         if (trailing) {
-          func(...args)
+          func(...lastArgs)
         }
         timeout.refresh()
         callInWindow = false
@@ -56,3 +56,14 @@ function opThrottle(func, wait, {trailing = true, leading = true}) {
     }, wait)
   };
 }
+
+// const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+// const result = opThrottle((i) => console.log(i), 400, {leading: false, trailing: true})
+
+// async function hello() {
+//   result(26)
+  
+//   await sleep(500)
+//   result(30)
+// }
+// hello()
