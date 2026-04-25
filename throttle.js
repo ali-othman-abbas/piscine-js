@@ -1,4 +1,4 @@
-
+const _  = require('lodash')
 function throttle(func, wait) {
   let lastArgs = null;
   let firstCallInWindow = true
@@ -13,14 +13,13 @@ function throttle(func, wait) {
       timeout = setTimeout(() => {
         if (!firstCallInWindow) {
           func(...lastArgs);
-          timeout = null;
-          firstCallInWindow = true
         }
+        timeout = null;
+        firstCallInWindow = true
       }, wait);
     }
   };
 }
-
 
 function opThrottle(func, wait, {trailing = true, leading = true}) {
   let lastArgs = null;
@@ -34,15 +33,15 @@ function opThrottle(func, wait, {trailing = true, leading = true}) {
     if (firstCallInWindow) {
       if (leading) {
         func(...lastArgs)
+      } else if (trailing) {
+        firstCallInWindow =false
       }
       timeout = setTimeout(() => {
-        if (!firstCallInWindow || trailing) {
-          if (trailing) {
+        if (!firstCallInWindow) {
             func(...lastArgs);
-          }
-          timeout = null;
-          firstCallInWindow = true
         }
+        timeout = null;
+        firstCallInWindow = true
       }, wait);
     }
   };
