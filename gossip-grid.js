@@ -55,7 +55,7 @@ function buildUI() {
 
 function buildForm() {
   const form = document.createElement("form");
-  form.classList.add('gossip')
+  form.classList.add("gossip");
   const textArea = document.createElement("textarea");
   const button = document.createElement("button");
   button.textContent = "Share gossip!";
@@ -83,6 +83,7 @@ function addEvents() {
   const form = document.querySelector("form.gossip");
   const button = form.querySelector("button");
   const textArea = form.querySelector("textarea");
+  
   /** @type {HTMLInputElement} */
   const widthSlider = document.querySelector("#width");
   /** @type {HTMLInputElement}*/
