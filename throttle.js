@@ -24,26 +24,32 @@ function throttle(func, wait) {
 
 function opThrottle(func, wait, {trailing = true, leading = true}) {
   let lastArgs = null;
-  let firstCallInWindow = true
+  let firstCall = true
+  let callInWindow = false
   let timeout = null;
   return (...args) => {
     lastArgs = args;
-    if (firstCallInWindow && timeout) {
-      firstCallInWindow = false
+    if (!firstCall && !callInWindow) {
+      callInWindow = true
     }
-    if (firstCallInWindow) {
+    if (firstCall) {
+      func(...lastArgs)
+      firstCall = false
       if (leading) {
-        func(...lastArgs)
-      } else if (trailing) {
-        firstCallInWindow = false
+        callInWindow = true
       }
-      timeout = setTimeout(() => {
-        if (!firstCallInWindow) {
-            func(...lastArgs);
-        }
-        timeout = null;
-        firstCallInWindow = true
-      }, wait);
     }
+    timeout = setTimeout(() => {
+      if (callInWindow) {
+        if (trailing) {
+          func(...args)
+        }
+        timeout.refresh()
+        callInWindow = false
+        if (leading) {
+          firstCall = true
+        }
+      }
+    }, wait)
   };
 }
