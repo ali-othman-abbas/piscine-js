@@ -2,18 +2,20 @@ function throttle(func, wait) {
   let firstCall = true
   let callInWindow = false
   let timeout = null;
+  let lastArgs = null
   return (...args) => {
+    lastArgs = args
     if (!firstCall && !callInWindow) {
       callInWindow = true
     }
     if (firstCall) {
-      func(...args)
+      func(...lastArgs)
       firstCall = false
     }
     if (timeout === null) {
       timeout = setTimeout(() => {
         if (callInWindow) {
-          func(...args)
+          func(...lastArgs)
           timeout.refresh()
           callInWindow = false
         }
@@ -39,14 +41,16 @@ function opThrottle(func, wait, { trailing, leading }) {
 function trailingThrottle(func, wait) {
   let callInWindow = false
   let timeout = null;
+  let lastArgs = null
   return (...args) => {
+    lastArgs = args
     if (!callInWindow) {
       callInWindow = true
     }
     if (timeout === null) {
       timeout = setTimeout(() => {
         if (callInWindow) {
-          func(...args)
+          func(...lastArgs)
           timeout.refresh()
           callInWindow = false
         }
@@ -58,9 +62,11 @@ function trailingThrottle(func, wait) {
 function leadingThrottle(func, wait) {
   let calledInWindow = false;
   let timeout = null;
+  let lastArgs = null
   return (...args) => {
+    lastArgs = args
     if (!calledInWindow) {
-      func(...args)
+      func(...lastArgs)
       calledInWindow = true
     }
     if (timeout === null) {
@@ -73,3 +79,14 @@ function leadingThrottle(func, wait) {
     }
   };
 }
+
+// const fun = throttle((i) => console.log(i), 2000)
+
+// let i = 0
+// setInterval(
+//   () => {
+//     fun(i)
+//     i++
+//   },
+//   100
+// )
