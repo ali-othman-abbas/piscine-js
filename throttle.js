@@ -1,16 +1,16 @@
 
-const add = (arr, el) => arr?.push(el)
-const run = (callback, callLimit, nbr) =>
-  new Promise((r) => {
-    let arr = []
-    let inter = setInterval(() => {
-      callback(arr, 1)
-    }, callLimit)
-    setTimeout(() => {
-      clearInterval(inter)
-      r(arr.length)
-    }, callLimit * nbr)
-  })
+// const add = (arr, el) => arr?.push(el)
+// const run = (callback, callLimit, nbr) =>
+//   new Promise((r) => {
+//     let arr = []
+//     let inter = setInterval(() => {
+//       callback(arr, 1)
+//     }, callLimit)
+//     setTimeout(() => {
+//       clearInterval(inter)
+//       r(arr.length)
+//     }, callLimit * nbr)
+//   })
 
 function throttle(func, wait) {
   let firstCall = true;
