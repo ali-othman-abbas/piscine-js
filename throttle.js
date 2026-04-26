@@ -1,21 +1,19 @@
 function throttle(func, wait) {
-  let lastArgs = null;
   let firstCall = true
   let callInWindow = false
   let timeout = null;
   return (...args) => {
-    lastArgs = args;
     if (!firstCall && !callInWindow) {
       callInWindow = true
     }
     if (firstCall) {
-      func(...lastArgs)
+      func(...args)
       firstCall = false
     }
     if (timeout === null) {
       timeout = setTimeout(() => {
         if (callInWindow) {
-          func(...lastArgs)
+          func(...args)
           timeout.refresh()
           callInWindow = false
         }
@@ -25,40 +23,51 @@ function throttle(func, wait) {
 }
 
 //to be fixed
-function opThrottle(func, wait, {trailing, leading}) {
-  let lastArgs = null;
-  let firstCall = true
-  if (!leading) {
-    firstCall = false
+function opThrottle(func, wait, { trailing, leading }) {
+  if ((trailing && leading) || (!trailing && !leading)) {
+    return throttle(func, wait)
   }
-  let setTimer = true
+  if (trailing && !leading) {
+    return trailingThrottle(func, wait)
+  }
+  if (!trailing && leading) {
+    return leadingThrottle(func, wait)
+  }
+}
+
+
+function trailingThrottle(func, wait) {
   let callInWindow = false
+  let timeout = null;
   return (...args) => {
-    lastArgs = args;
-    if (!firstCall && !callInWindow) {
+    if (!callInWindow) {
       callInWindow = true
     }
-    if (firstCall) {
-      if (setTimer || !leading || !trailing) {
-        func(...lastArgs)
-      }
-      firstCall = false
-      if (leading) {
-        callInWindow = true
-      }
-    }
-    if (setTimer) {
-      setTimer = false
-      const timeout = setTimeout(() => {
+    if (timeout === null) {
+      timeout = setTimeout(() => {
         if (callInWindow) {
-          if (trailing) {
-            func(...lastArgs)
-          }
+          func(...args)
           timeout.refresh()
           callInWindow = false
-          if (leading) {
-            firstCall = true
-          }
+        }
+      }, wait)
+    }
+  };
+}
+
+function leadingThrottle(func, wait) {
+  let calledInWindow = false;
+  let timeout = null;
+  return (...args) => {
+    if (!calledInWindow) {
+      func(...args)
+      calledInWindow = true
+    }
+    if (timeout === null) {
+      timeout = setTimeout(() => {
+        if (calledInWindow) {
+          timeout.refresh()
+          calledInWindow = false
         }
       }, wait)
     }
