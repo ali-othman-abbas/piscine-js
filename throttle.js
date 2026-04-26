@@ -12,16 +12,19 @@ function throttle(func, wait) {
       func(...lastArgs)
       firstCall = false
     }
-    timeout = setTimeout(() => {
-      if (callInWindow) {
-        func(...lastArgs)
-        timeout.refresh()
-        callInWindow = false
-      }
-    }, wait)
+    if (timeout === null) {
+      timeout = setTimeout(() => {
+        if (callInWindow) {
+          func(...lastArgs)
+          timeout.refresh()
+          callInWindow = false
+        }
+      }, wait)
+    }
   };
 }
 
+//to be fixed
 function opThrottle(func, wait, {trailing, leading}) {
   let lastArgs = null;
   let firstCall = true
