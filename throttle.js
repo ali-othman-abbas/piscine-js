@@ -1,92 +1,54 @@
 
-// const add = (arr, el) => arr?.push(el)
-// const run = (callback, callLimit, nbr) =>
-//   new Promise((r) => {
-//     let arr = []
-//     let inter = setInterval(() => {
-//       callback(arr, 1)
-//     }, callLimit)
-//     setTimeout(() => {
-//       clearInterval(inter)
-//       r(arr.length)
-//     }, callLimit * nbr)
-//   })
+const add = (arr, el) => arr?.push(el)
+const run = (callback, callLimit, nbr) =>
+  new Promise((r) => {
+    let arr = []
+    let inter = setInterval(() => {
+      callback(arr, 1)
+    }, callLimit)
+    setTimeout(() => {
+      clearInterval(inter)
+      r(arr.length)
+    }, callLimit * nbr)
+  })
 
 function throttle(func, wait) {
-  let firstCall = true;
-  let callInWindow = false;
+  let firstCall = true
+  let callInWindow = false
   let timeout = null;
-  let lastArgs = null;
-
+  let lastArgs = null
   return (...args) => {
-    lastArgs = args;
-
-    if (firstCall) {
-      func(...args);
-      firstCall = false;
-    } else {
-      callInWindow = true;
+    lastArgs = args
+    if (!firstCall && !callInWindow) {
+      callInWindow = true
     }
-
+    if (firstCall) {
+      func(...lastArgs)
+      firstCall = false
+    }
     if (timeout === null) {
       timeout = setTimeout(() => {
         if (callInWindow) {
-          func(...lastArgs);
+          func(...lastArgs)
+          timeout.refresh()
+          callInWindow = false
         }
-
-        // reset for next window
-        callInWindow = false;
-        timeout = null;
-      }, wait);
+      }, wait)
     }
   };
 }
 
 //to be fixed
-function opThrottle(func, wait, { leading = true, trailing = true } = {}) {
-  let lastCallTime = 0;
-  let timeout = null;
-  let lastArgs = null;
-
-  const invoke = (time) => {
-    lastCallTime = time;
-    func(...lastArgs);
-    lastArgs = null;
-  };
-
-  const startTimer = (remaining) => {
-    timeout = setTimeout(() => {
-      timeout = null;
-
-      if (trailing && lastArgs) {
-        invoke(Date.now());
-      }
-    }, remaining);
-  };
-
-  return (...args) => {
-    const now = Date.now();
-
-    // If leading is false, delay first execution
-    if (!lastCallTime && !leading) {
-      lastCallTime = now;
-    }
-
-    const remaining = wait - (now - lastCallTime);
-    lastArgs = args;
-
-    if (remaining <= 0 || remaining > wait) {
-      // execute immediately
-      if (timeout) {
-        clearTimeout(timeout);
-        timeout = null;
-      }
-      invoke(now);
-    } else if (!timeout && trailing) {
-      // schedule trailing execution
-      startTimer(remaining);
-    }
-  };
+function opThrottle(func, wait, { trailing, leading }) {
+  if ((trailing && leading) || (!trailing && !leading)) {
+    return throttle(func, wait)
+  }
+  if (trailing && !leading) {
+    return trailingThrottle(func, wait)
+  }
+  if (!trailing && leading) {
+    return leadingThrottle(func, wait)
+  }
 }
 
 
@@ -142,3 +104,11 @@ setInterval(
   },
   100
 )
+
+// async function hello() {
+  
+//   const result = await run(throttle(add, 100), 26, 5)
+//   console.log(result)
+// }
+
+// hello()
