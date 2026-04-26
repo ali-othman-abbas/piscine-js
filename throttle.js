@@ -108,11 +108,3 @@ setInterval(
   },
   100
 )
-
-// async function hello() {
-  
-//   const result = await run(throttle(add, 100), 26, 5)
-//   console.log(result)
-// }
-
-// hello()
