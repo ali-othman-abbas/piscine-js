@@ -8,7 +8,7 @@ async function interpolation({ step, start, end, callback, duration }) {
       callback([x, y])
     }, y)
   }
-  if (end <= start) {
+  if (end >= start) {
     for (let i = 0; start + mov * i < end; i++) {
       const x = start + mov * i;
       const y = (i + 1) * durStep;
