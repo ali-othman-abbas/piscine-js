@@ -3,7 +3,7 @@
  * @param {string} path
  * @param {Record<string, string>} options
  */
-async function getJson(path, options) {
+async function getJSON(path, options) {
   const params = new URLSearchParams(options);
   const url = `${path}?${params.toString()}`;
 
