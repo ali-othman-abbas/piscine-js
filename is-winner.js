@@ -84,14 +84,14 @@ async function isWinner(countryName) {
 
   const years = wins.reduce((accum, curr, idx) => {
     let str = `${accum}${curr.year}`;
-    if (idx < winInfo.length) {
+    if (idx < winInfo.length - 1) {
       str = `${str}, `;
     }
     return str;
   }, "");
   const result = wins.reduce((accum, curr, idx) => {
     let str = `${accum}${curr.score}`;
-    if (idx < winInfo.length) {
+    if (idx < winInfo.length - 1) {
       str = `${str}, `;
     }
     return str;
