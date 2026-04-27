@@ -12,7 +12,7 @@ function retry(count, callback) {
     } catch (err) {
       errCnt++;
       if (errCnt >= count) {
-        return new Error(err);
+        throw new Error(err);
       }
       return args
     }
