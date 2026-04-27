@@ -73,7 +73,7 @@ async function isWinner(countryName) {
     );
   }
 
-  const winInfo = await db.getResults(countryName);
+  const winInfo = await db.getResults(countryInfo.id);
   const wins = winInfo.filter((info) => info.countryId === countryInfo.id);
 
   if (wins.length < 3) {
@@ -103,7 +103,7 @@ async function isWinner(countryName) {
 }
 
 // (async () => {
-//   const nice = await isWinner('England')
+//   const nice = await isWinner("England");
 
-//   console.log(nice)
-// })()
+//   console.log(nice);
+// })();
