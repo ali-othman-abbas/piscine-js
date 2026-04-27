@@ -1,22 +1,17 @@
-function interpolation({ step, start, end, callback, duration }) {
+
+async function interpolation({ step, start, end, callback, duration }) {
   const mov = (end - start) / step;
+  const durStep = duration / step
 
-  let i = 0;
-  let x = start + mov * i;
-  let y = duration * (mov * (i + 1));
-  const id = setInterval(() => {
-    callback([x, y]);
-    i++;
-    x = start + mov * i;
-    y = duration * (mov * (i + 1));
-    if (x === end) id.close();
-  }, y);
+  const inner = (x, y) => {
+    setTimeout(() => {
+      callback([x, y])
+    }, y)
+  }
+  for (let i = 0; start + mov * i < end; i++) {
+    const x = start + mov * i;
+    const y = (i + 1) * durStep;
+    inner(x, y)
+  }
+    
 }
-
-interpolation({
-  step: 5,
-  start: 0,
-  end: 4,
-  duration: 50,
-  callback: ([x, y]) => console.log(x, y)
-})
