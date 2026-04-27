@@ -16,8 +16,8 @@ function retry(count, callback) {
         funcErr = err
       }
     }
-    
-    throw new Error(funcErr)
+    console.log(funcErr)
+    throw funcErr
   };
 }
 
