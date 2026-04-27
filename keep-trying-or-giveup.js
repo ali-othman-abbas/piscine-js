@@ -6,18 +6,21 @@
  */
 function retry(count, callback) {
   let errCnt = 0;
+  let funcErr = null
   return async (...args) => {
-    try {
-      return await callback(...args);
-    } catch (err) {
-      errCnt++;
-      if (errCnt >= count) {
-        throw new Error(err);
+    while (errCnt <= count) {
+      try {
+        return await callback(...args);
+      } catch (err) {
+        errCnt++
+        funcErr = err
       }
-      return args
     }
+    
+    throw new Error(funcErr)
   };
 }
+
 
 /**
  * @template T, U
