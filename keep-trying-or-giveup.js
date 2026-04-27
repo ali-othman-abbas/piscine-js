@@ -12,8 +12,9 @@ function retry(count, callback) {
     } catch (err) {
       errCnt++;
       if (errCnt >= count) {
-        throw new Error("fail");
+        return err;
       }
+      return callback
     }
   };
 }
