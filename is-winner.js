@@ -68,7 +68,7 @@ async function isWinner(countryName) {
     return `${countryName} never was a winner`;
   }
 
-  if (countryInfo.continent === `Europe`) {
+  if (countryInfo.continent !== `Europe`) {
     return `${countryName} is not what we are looking for because of the continent`;
   }
 
