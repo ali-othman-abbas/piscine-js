@@ -1,3 +1,4 @@
+
 // const db = (() => {
 //   //countries that won the FIFA World Cup
 //   const countries = [
@@ -54,10 +55,15 @@
 //   };
 // })();
 
+/**
+ * 
+ * @param {string} countryName 
+ * @returns 
+ */
 async function isWinner(countryName) {
   let countryInfo = null;
   try {
-    countryInfo = await db.getWinner();
+    countryInfo = await db.getWinner(countryName);
   } catch (err) {
     return `${countryName} never was a winner`;
   }
@@ -66,7 +72,7 @@ async function isWinner(countryName) {
     return `${countryName} is not what we are looking for because of the continent`;
   }
 
-  const winInfo = await db.getResults();
+  const winInfo = await db.getResults(countryName);
   const wins = winInfo.filter((info) => info.countryId === countryInfo.id);
 
   if (wins.length < 3) {
@@ -90,3 +96,9 @@ async function isWinner(countryName) {
 
   return `${countryName} won the FIFA World Cup in ${years} winning by ${result}`;
 }
+
+// (async () => {
+//   const nice = await isWinner('England')
+  
+//   console.log(nice)
+// })()
