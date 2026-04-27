@@ -2,7 +2,7 @@
  * @template T, U
  * @param {number} count
  * @param {(...args: T[]) => Promise<U>} callback
- * @return {(...args: T[]) => Promise<U>}
+ * @return {(...args: T[]) => Promise<T[] | U>}
  */
 function retry(count, callback) {
   let errCnt = 0;
