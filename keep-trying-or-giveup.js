@@ -14,7 +14,7 @@ function retry(count, callback) {
       if (errCnt >= count) {
         return err;
       }
-      return callback
+      return args
     }
   };
 }
