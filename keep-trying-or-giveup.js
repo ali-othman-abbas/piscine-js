@@ -6,21 +6,19 @@
  */
 function retry(count, callback) {
   let errCnt = 0;
-  let funcErr = null
+  let funcErr = null;
   return async (...args) => {
     while (errCnt <= count) {
       try {
         return await callback(...args);
       } catch (err) {
-        errCnt++
-        funcErr = err
+        errCnt++;
+        funcErr = err;
       }
     }
-    console.log(funcErr)
-    throw funcErr
+    throw funcErr;
   };
 }
-
 
 /**
  * @template T, U
@@ -29,18 +27,10 @@ function retry(count, callback) {
  * @returns {(...args: T[]) => Promise<U>}
  */
 function timeout(delay, callback) {
+  const timer = new Promise((_, rej) =>
+    setTimeout(rej, delay, new Error("timeout")),
+  );
   return async (...args) => {
-    const prom = new Promise(async (resolve, reject) => {
-      setTimeout(() => reject(new Error("timeout")), delay);
-      resolve(await callback(...args));
-    });
-
-    try {
-      return await prom;
-    } catch (err) {
-      throw err;
-    }
+    return Promise.race([callback(...args), timer]);
   };
 }
-
-
