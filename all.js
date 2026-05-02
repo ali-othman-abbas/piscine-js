@@ -1,4 +1,7 @@
 async function all(obj) {
+  if (Object.keys(obj).length === 0) {
+    return Promise.resolve({})
+  }
   const arr = Object.entries(obj).map(([_, p]) => p);
   let counter = 0;
   let failed = null;
