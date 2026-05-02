@@ -9,6 +9,12 @@ function race(arr) {
   });
 }
 
+/**
+ * 
+ * @param {Promise<any>[]} arr 
+ * @param {number} count 
+ * @returns 
+ */
 function some(arr, count) {
   const result = [];
   count = Math.min(arr.length, count);
