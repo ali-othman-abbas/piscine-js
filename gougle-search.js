@@ -12,11 +12,7 @@ async function queryServers(serverName, q) {
   });
   const url1 = `/${serverName}?${params}`;
   const url2 = `/${serverName}_backup?${params}`;
-  try {
-    return Promise.race([getJSON(url1), getJSON(url2)]);
-  } catch (err) {
-    console.log(err);
-  }
+  return Promise.race([getJSON(url1), getJSON(url2)]);
 }
 
 /**
