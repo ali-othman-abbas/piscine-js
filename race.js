@@ -11,14 +11,11 @@ function race(arr) {
 
 function some(arr, count) {
   const result = [];
-  if (arr.length === 0) {
-    return Promise.resolve([]);
-  }
+  count = min(arr.length, count);
   if (count === 0) {
     return Promise.resolve(undefined)
   }
   
-  count = min(arr.length, count);
 
   return new Promise((res, _) => {
     function dec() {
