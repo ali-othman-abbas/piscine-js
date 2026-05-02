@@ -26,7 +26,7 @@ function some(arr, count) {
     function dec() {
       count--;
       if (count === 0) {
-        res(result.sort((a, b) => a.pos - b.pos).map(({ _, val }) => val));
+        res(result.sort((a, b) => a.pos - b.pos).map(obj => obj.val));
       }
     }
 
