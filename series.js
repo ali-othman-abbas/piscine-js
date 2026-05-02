@@ -3,10 +3,10 @@
  * @param {(() => Promise<any>)[]} arr 
  * @returns 
  */
-function series(arr) {
-  return Promise.all(
-    arr.map(func => Promise.resolve(func()))
-  );
+async function series(arr) {
+  const results = []
+  arr.forEach(async func => results.push(await func()))
+  return results
   // const results = Array.from({ length: arr.length });
   // let remaining = arr.length;
   // return new Promise((res, _) => {
