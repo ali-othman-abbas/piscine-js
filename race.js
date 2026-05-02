@@ -13,15 +13,14 @@ function some(arr, count) {
   const result = [];
   count = Math.min(arr.length, count);
   if (count === 0) {
-    return Promise.resolve([])
+    return Promise.resolve([]);
   }
-  
 
   return new Promise((res, _) => {
     function dec() {
       count--;
       if (count === 0) {
-        res(result.sort((a, b) => a.pos - b.pos).map(({_, val}) => val))
+        res(result.sort((a, b) => a.pos - b.pos).map(({ _, val }) => val));
       }
     }
 
@@ -29,7 +28,7 @@ function some(arr, count) {
       Promise.resolve(p).then((val) => {
         result.push({
           pos,
-          val
+          val,
         });
         dec();
       }),
