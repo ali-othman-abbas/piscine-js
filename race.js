@@ -5,15 +5,15 @@
  */
 function race(arr) {
   return new Promise((res, rej) => {
-    arr.forEach((p) => Promise.resolve(p).then(res, rej));
+    arr.forEach((p) => Promise.resolve(p).then(res).catch(rej));
   });
 }
 
 /**
- * 
- * @param {Promise<any>[]} arr 
- * @param {number} count 
- * @returns 
+ *
+ * @param {Promise<any>[]} arr
+ * @param {number} count
+ * @returns
  */
 function some(arr, count) {
   const result = [];
@@ -26,7 +26,7 @@ function some(arr, count) {
     function dec() {
       count--;
       if (count === 0) {
-        res(result.sort((a, b) => a.pos - b.pos).map(obj => obj.val));
+        res(result.sort((a, b) => a.pos - b.pos).map((obj) => obj.val));
       }
     }
 
