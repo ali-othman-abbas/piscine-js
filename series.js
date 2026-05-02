@@ -25,16 +25,16 @@ function series(arr) {
   });
 }
 
-// function wait(ms) {
-//   return () =>
-//     new Promise((res, _) => setTimeout(res, ms, ms));
-// }
+function wait(ms) {
+  return () =>
+    new Promise((res, _) => setTimeout(res, ms, ms));
+}
 
-// const arr = [wait(2000), wait(500), wait(800)];
+const arr = [];
 
-//   (async () => {
-//     const start = Date.now()
-//     console.log(await series(arr))
-//     const duration = Date.now() - start
-//     console.log(`${duration} ms have passed`)
-//   })()
+  (async () => {
+    const start = Date.now()
+    console.log(await series(arr))
+    const duration = Date.now() - start
+    console.log(`${duration} ms have passed`)
+  })()
