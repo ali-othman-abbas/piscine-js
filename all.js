@@ -50,11 +50,10 @@
 //   );
 // }
 
-
 /**
- * 
- * @param {Record<string, any>} obj 
- * @returns 
+ *
+ * @param {Record<string, any>} obj
+ * @returns
  */
 function all(obj) {
   const result = {};
@@ -71,15 +70,14 @@ function all(obj) {
       }
     }
     for (let k of keys) {
-      Promise.resolve(obj[k]).then(
-        (val) => {
+      Promise.resolve(obj[k])
+        .then((val) => {
           result[k] = val;
           inc();
-        },
-        (err) => {
+        })
+        .catch((err) => {
           rej(err);
-        },
-      );
+        });
     }
   });
 }
