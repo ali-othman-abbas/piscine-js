@@ -13,7 +13,7 @@ function some(arr, count) {
   const result = [];
   count = Math.min(arr.length, count);
   if (count === 0) {
-    return Promise.resolve(undefined)
+    return Promise.resolve([])
   }
   
 
