@@ -21,13 +21,16 @@ function some(arr, count) {
     function dec() {
       count--;
       if (count === 0) {
-        res(result);
+        res(result.sort((a, b) => a.pos - b.pos))
       }
     }
 
-    arr.forEach((p) =>
+    arr.forEach((p, pos) =>
       Promise.resolve(p).then((val) => {
-        result.push(val);
+        result.push({
+          pos,
+          val
+        });
         dec();
       }),
     );
