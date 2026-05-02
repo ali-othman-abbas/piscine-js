@@ -27,6 +27,7 @@ async function gougleSearch(q) {
     ]),
     new Promise((_, rej) => setTimeout(rej, 80, new Error("timeout"))),
   ]);
+  
   return {
     web: arr[0],
     image: arr[1],
