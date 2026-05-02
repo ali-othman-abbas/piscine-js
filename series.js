@@ -7,6 +7,9 @@ function series(arr) {
   const results = Array.from({ length: arr.length });
   let remaining = arr.length;
   return new Promise((res, _) => {
+    if (arr.length === 0) {
+      res([])
+    }
     function dec() {
       remaining--;
       if (remaining === 0) {
