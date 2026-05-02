@@ -5,7 +5,9 @@
  */
 async function series(arr) {
   const results = []
-  arr.forEach(async func => results.push(await func()))
+  for (let i = 0; i < arr.length; i++) {
+    results.push(await arr[i]())
+  }
   return results
   // const results = Array.from({ length: arr.length });
   // let remaining = arr.length;
