@@ -11,7 +11,7 @@ function race(arr) {
 
 function some(arr, count) {
   const result = [];
-  count = min(arr.length, count);
+  count = Math.min(arr.length, count);
   if (count === 0) {
     return Promise.resolve(undefined)
   }
