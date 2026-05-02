@@ -1,13 +1,19 @@
+/**
+ *
+ * @param {Record<string, Promise<any>>} obj
+ * @returns
+ */
 async function all(obj) {
   if (Object.keys(obj).length === 0) {
-    return Promise.resolve({})
+    return Promise.resolve({});
   }
   const arr = Object.entries(obj).map(([_, p]) => p);
   let counter = 0;
   let failed = null;
 
-  const promiseArr = arr.map((p) =>
-    p.then(
+  const promiseArr = arr.map((p) => {
+    p = Promise.resolve(p);
+    return p.then(
       (val) => {
         counter++;
         check();
@@ -17,8 +23,8 @@ async function all(obj) {
         failed = err;
         check();
       },
-    ),
-  );
+    );
+  });
 
   let resolveFn;
   let rejFn;
