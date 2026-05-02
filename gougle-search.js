@@ -35,6 +35,6 @@ async function gougleSearch(q) {
       video: arr[2],
     }
   } catch (err) {
-    return err
+    throw err
   }
 }
