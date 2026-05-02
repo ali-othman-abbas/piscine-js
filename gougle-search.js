@@ -1,4 +1,3 @@
-
 // let getJSON = async (url) => url;
 
 /**
@@ -20,21 +19,17 @@ async function queryServers(serverName, q) {
  * @param {string} q
  */
 async function gougleSearch(q) {
-  try {
-    const arr = await Promise.race([
-      Promise.all([
-        queryServers("web", q),
-        queryServers("image", q),
-        queryServers("video", q),
-      ]),
-      new Promise((_, rej) => setTimeout(rej, 80, new Error("timeout"))),
-    ]);
-    return {
-      web: arr[0],
-      image: arr[1],
-      video: arr[2],
-    }
-  } catch (err) {
-    throw err
-  }
+  const arr = await Promise.race([
+    Promise.all([
+      queryServers("web", q),
+      queryServers("image", q),
+      queryServers("video", q),
+    ]),
+    new Promise((_, rej) => setTimeout(rej, 80, new Error("timeout"))),
+  ]);
+  return {
+    web: arr[0],
+    image: arr[1],
+    video: arr[2],
+  };
 }
