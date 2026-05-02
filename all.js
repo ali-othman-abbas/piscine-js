@@ -1,10 +1,8 @@
-/**
- *
- * @param {Promise<any>[]} arr
- */
-async function all(arr) {
+async function all(obj) {
+  const arr = Object.entries(obj).map(([_, p]) => p);
   let counter = 0;
   let failed = null;
+
   const promiseArr = arr.map((p) =>
     p.then(
       (val) => {
@@ -35,5 +33,8 @@ async function all(arr) {
     }
   }
 
-  return promise;
+  const returnedPromiseArr = await promise;
+  return Object.fromEntries(
+    Object.entries(obj).map(([str, _], idx) => [str, returnedPromiseArr[idx]]),
+  );
 }
