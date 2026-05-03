@@ -27,9 +27,8 @@ function some(arr, count) {
       count--;
       if (count === 0) {
         out.forEach(el => el ? result.push(el) : null)
+        res(result)
       }
-      
-      res(result)
     }
 
     arr.forEach((p, pos) =>
