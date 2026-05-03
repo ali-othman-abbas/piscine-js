@@ -16,26 +16,25 @@ function race(arr) {
  * @returns
  */
 function some(arr, count) {
-  const result = [];
   count = Math.min(arr.length, count);
   if (count === 0) {
     return Promise.resolve([]);
   }
-
+  const result = [];
+  const out = new Array(arr.length);
   return new Promise((res, _) => {
     function dec() {
       count--;
       if (count === 0) {
-        res(result.sort((a, b) => a.pos - b.pos).map((obj) => obj.val));
+        out.forEach(el => el ? result.push(el) : null)
       }
+      
+      res(result)
     }
 
     arr.forEach((p, pos) =>
       Promise.resolve(p).then((val) => {
-        result.push({
-          pos,
-          val,
-        });
+        out[pos] = val;
         dec();
       }),
     );
