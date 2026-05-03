@@ -1,4 +1,4 @@
-import { readdir, readFile } from "fs/promises";
+import { readdir, readFile, writeFile } from "fs/promises";
 import { argv } from "process";
 
 async function filterForYes(path) {
@@ -10,8 +10,11 @@ async function filterForYes(path) {
       }),
     );
     const jsons = await Promise.all(promiseMap);
-    file
-      .filter((_, idx) => JSON.parse(jsons[idx]).answer === "yes")
+    const yesMen = file.filter(
+      (_, idx) => JSON.parse(jsons[idx]).answer === "yes",
+    );
+    await writeFile("vip.txt", yesMen.join("\n"));
+    yesMen
       .map((el) => el.split(".")[0].split("_"))
       .toSorted((a, b) => a[1].localeCompare(b[1]))
       .map(([first, last], idx) => `${idx + 1}. ${last} ${first}`)
@@ -21,6 +24,6 @@ async function filterForYes(path) {
   }
 }
 
-const path = argv[2]
+const path = argv[2];
 
 filterForYes(path);
