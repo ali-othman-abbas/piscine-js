@@ -7,11 +7,8 @@ async function list(path) {
     const result = files
       .map(el => el.split('.')[0].split('_'))
       .toSorted((a, b) => a[1].localeCompare(b[1]))
-      .map(([first, last], idx) => {
-        return `${idx + 1}. ${last} ${first}`
-      })
-    
-    console.log(result)
+      .map(([first, last], idx) => `${idx + 1}. ${last} ${first}` )
+      .forEach(el => console.log(el))
   } catch (err) {
     console.log(err)
   }
