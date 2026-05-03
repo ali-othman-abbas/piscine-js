@@ -12,13 +12,12 @@ async function filterForYes(path) {
     const jsons = await Promise.all(promiseMap);
     const yesMen = file.filter(
       (_, idx) => JSON.parse(jsons[idx]).answer === "yes",
-    );
+    )
+    .map((el) => el.split(".")[0].split("_"))
+    .toSorted((a, b) => a[1].localeCompare(b[1]))
+    .map(([first, last], idx) => `${idx + 1}. ${last} ${first}`)
     await writeFile("vip.txt", yesMen.join("\n"));
-    yesMen
-      .map((el) => el.split(".")[0].split("_"))
-      .toSorted((a, b) => a[1].localeCompare(b[1]))
-      .map(([first, last], idx) => `${idx + 1}. ${last} ${first}`)
-      .forEach((el) => console.log(el));
+    yesMen.forEach((el) => console.log(el))
   } catch (err) {
     console.log(err);
   }
