@@ -21,12 +21,12 @@ function some(arr, count) {
     return Promise.resolve([]);
   }
   const result = [];
-  const out = new Array(arr.length);
+  const out = [];
   return new Promise((res, _) => {
     function dec() {
       count--;
       if (count === 0) {
-        out.forEach(el => el ? result.push(el) : null)
+        out.forEach(el => result.push(el))
         res(result)
       }
     }
