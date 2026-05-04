@@ -5,7 +5,7 @@ const path = argv[2];
 const keyword = argv[3];
 let distination = argv[4];
 
-(async function () {
+(async () => {
   try {
     const content = await readFile(path, "utf8");
     if (keyword === "encode") {
