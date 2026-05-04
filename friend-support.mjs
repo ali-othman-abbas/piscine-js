@@ -9,7 +9,7 @@ const server = createServer(async (req, res) => {
   try {
     file = await readFile(`./guests/${guest}.json`, 'utf8')
   } catch (err) {
-    if (err.code === 'ENDENT') {
+    if (err.code === 'ENOENT') {
       res.statusCode = 400
       res.end(JSON.stringify({
         error: 'guest not found'
