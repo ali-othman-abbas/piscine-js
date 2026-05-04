@@ -4,18 +4,27 @@ import { createServer } from 'node:http';
 // Create a local server to receive data from
 const server = createServer(async (req, res) => {
   const guest = req.url
+  res.setHeader('Content-type', 'application/json')
+  let file = null
   try {
-    const file = await readFile(`./guests/${guest}.json`, 'utf8')
-    res.setHeader('Content-type', 'application/json')
-    res.statusCode = 200
-    res.end(file)
+    file = await readFile(`./guests/${guest}.json`, 'utf8')
   } catch (err) {
-    res.setHeader('Content-type', 'application/json')
-    res.statusCode = 400
-    res.end(JSON.stringify({
-      error: 'guest not found'
-    }))
+    if (err.code === 'ENDENT') {
+      res.statusCode = 400
+      res.end(JSON.stringify({
+        error: 'guest not found'
+      }))
+    } else {
+      res.statusCode = 500
+      res.end(JSON.stringify({
+        error: 'server failed'
+      }))
+    }
   }
+  
+  res.statusCode = 200
+  
+  res.end(file)
 });
 
 server.listen(5000, () => {
