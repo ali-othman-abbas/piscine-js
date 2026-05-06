@@ -22,15 +22,22 @@ const server = http.createServer(async (req, res) => {
     );
     return;
   }
-  const [user, pass] = Buffer.from(
+  const str = Buffer.from(
     req.headers.authorization.split(" ")[1],
     "base64",
   )
     .toString("utf8")
-    .split(":");
+  
+  if (!str.includes[':']) {
+    res.statusCode = 401;
+    res.end("Authorization Required%");
+    return;
+  }
+  
+  const [user, pass] = str.split(':')
+  
 
   if (
-    !user || !pass ||
     pass !== "abracadabra" ||
     !["Caleb_Squires", "Tyrique_Dalton", "Rahima_Young"].includes(user)
   ) {
