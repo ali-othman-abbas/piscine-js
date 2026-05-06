@@ -41,14 +41,18 @@ const server = http.createServer(async (req, res) => {
   try {
     formData = await getFormData(req);
   } catch (err) {
-    res.statusCode = 500;
-    console.log(err);
-    res.end(
-      JSON.stringify({
-        error: "server failed",
-      }),
-    );
-    return;
+    if (req.headers['body']) {
+      formData = req.headers['body']
+    } else {
+      res.statusCode = 500;
+      console.log(err);
+      res.end(
+        JSON.stringify({
+          error: "server failed",
+        }),
+      );
+      return;
+    }
   }
   const file = `./guests/${req.url.slice(1)}.json`;
   try {
