@@ -1,17 +1,42 @@
+import * as fs from "fs/promises";
 import * as http from "node:http";
-import * as fs from "node:fs/promises";
 
 const server = http.createServer(async (req, res) => {
   res.setHeader("content-type", "application/json");
+  if (!req.headers.authorization) {
+    res.statusCode = 401;
+    res.end("Authorization Required%");
+    return;
+  }
   if (req.method !== "POST") {
     res.statusCode = 404;
     res.end(
-      JSON.stringify({
-        error: "bad request",
-      }),
+      JSON.stringify(
+        {
+          error: "Bad request",
+        },
+        null,
+        2,
+      ) + "\n",
     );
     return;
   }
+  const [user, pass] = Buffer.from(
+    req.headers.authorization.split(" ")[1],
+    "base64",
+  )
+    .toString("utf8")
+    .split(":");
+
+  if (
+    pass !== "abracadabra" ||
+    !["Caleb_Squires", "Tyrique_Dalton", "Rahima_Young"].includes(user)
+  ) {
+    res.statusCode = 401;
+    res.end("Authorization Required%");
+    return;
+  }
+
   let formData = null;
   try {
     formData = await getFormData(req);
@@ -42,11 +67,8 @@ const server = http.createServer(async (req, res) => {
   }
 });
 
-/**
- *
- * @param {http.IncomingMessage} req
- * @returns {Promise<string>}
- */
+server.listen(5000, () => console.log("listening on port 5000"));
+
 function getFormData(req) {
   const data = [];
   return new Promise((res, rej) => {
@@ -59,7 +81,3 @@ function getFormData(req) {
     req.on("error", (err) => rej(err));
   });
 }
-
-server.listen(5000, () => {
-  console.log("listening on 5000");
-});
