@@ -30,6 +30,7 @@ const server = http.createServer(async (req, res) => {
     .split(":");
 
   if (
+    !user || !pass ||
     pass !== "abracadabra" ||
     !["Caleb_Squires", "Tyrique_Dalton", "Rahima_Young"].includes(user)
   ) {
