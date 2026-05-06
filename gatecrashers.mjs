@@ -74,11 +74,10 @@ function getFormData(req) {
   const data = [];
   return new Promise((res, rej) => {
     req.on("data", (chunk) => {
-      console.log(chunk)
       data.push(chunk);
     });
 
-    req.on("end", () => res(data.join("")));
+    req.on("end", () => res(Buffer.concat(data).toString('utf8')));
 
     req.on("error", (err) => rej(err));
   });
