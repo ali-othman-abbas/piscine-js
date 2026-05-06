@@ -17,7 +17,7 @@ const server = http.createServer(async (req, res) => {
         },
         null,
         2,
-      ) + "\n",
+      ),
     );
     return;
   }
@@ -54,7 +54,7 @@ const server = http.createServer(async (req, res) => {
   try {
     await fs.writeFile(file, formData);
     res.statusCode = 200;
-    res.end(formData);
+    res.end(JSON.stringify(JSON.parse(formData), null, 2));
   } catch (err) {
     res.statusCode = 500;
     console.log(err);
