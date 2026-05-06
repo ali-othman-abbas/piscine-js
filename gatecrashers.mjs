@@ -3,7 +3,7 @@ import * as http from "node:http";
 
 const server = http.createServer(async (req, res) => {
   res.setHeader("content-type", "application/json");
-  if (!req.headers.authorization) {
+  if (!req.headers.authorization || !req.headers.authorization.split(" ")[1]) {
     res.statusCode = 401;
     res.end("Authorization Required%");
     return;
