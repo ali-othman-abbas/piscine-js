@@ -54,7 +54,8 @@ const server = http.createServer(async (req, res) => {
       return;
     }
   }
-  const file = `./guests/${req.url.slice(1)}.json`;
+  
+  const file = `./guests/${req.url}.json`;
   try {
     await fs.writeFile(file, formData);
     res.statusCode = 200;
