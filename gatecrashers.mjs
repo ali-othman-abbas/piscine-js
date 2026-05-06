@@ -50,8 +50,7 @@ const server = http.createServer(async (req, res) => {
     );
     return;
   }
-  console.log(formData)
-  const file = `./guests/${req.url}.json`;
+  const file = `./guests/${req.url.slice(1)}.json`;
   try {
     await fs.writeFile(file, formData);
     res.statusCode = 200;
@@ -77,7 +76,7 @@ function getFormData(req) {
       data.push(chunk);
     });
 
-    req.on("end", () => res(Buffer.concat(data).toString('utf8')));
+    req.on("end", () => res(Buffer.concat(data).toString("utf8")));
 
     req.on("error", (err) => rej(err));
   });
