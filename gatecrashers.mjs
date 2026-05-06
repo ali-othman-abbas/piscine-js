@@ -3,11 +3,6 @@ import * as http from "node:http";
 
 const server = http.createServer(async (req, res) => {
   res.setHeader("content-type", "application/json");
-  if (!req.headers.authorization || !req.headers.authorization.split(" ")[1]) {
-    res.statusCode = 401;
-    res.end("Authorization Required%");
-    return;
-  }
   if (req.method !== "POST") {
     res.statusCode = 404;
     res.end(
@@ -24,22 +19,10 @@ const server = http.createServer(async (req, res) => {
   const str = Buffer.from(
     req.headers.authorization.split(" ")[1],
     "base64",
-  )
-    .toString("utf8")
-  
-  if (!str.includes(':')) {
-    res.statusCode = 401;
-    res.end("Authorization Required%");
-    return;
-  }
-  
-  const [user, pass] = str.split(':')
-  
+  ).toString("utf8");
 
-  if (
-    pass !== "abracadabra" ||
-    !["Caleb_Squires", "Tyrique_Dalton", "Rahima_Young"].includes(user)
-  ) {
+  const [user, pass, error] = checkAuthorizationInfor(req);
+  if (error) {
     res.statusCode = 401;
     res.end("Authorization Required%");
     return;
@@ -93,9 +76,33 @@ function getFormData(req) {
     req.on("end", () => {
       const result =
         req.headers["body"] || req.headers["Body"] || req.headers["x-body"];
-      
-      res(data.join("") || result || '')
+
+      res(data.join("") || result || "");
     });
-    
   });
+}
+function checkAuthorizationInfor(req) {
+  if (!req.headers.authorization || !req.headers.authorization.split(" ")[1]) {
+    return ["", "", "error"];
+  }
+
+  const str = Buffer.from(
+    req.headers.authorization.split(" ")[1],
+    "base64",
+  ).toString("utf8");
+
+  if (!str.includes(":")) {
+    return ["", "", "error"];
+  }
+
+  const [user, pass] = str.split(":");
+
+  if (
+    pass !== "abracadabra" ||
+    !["Caleb_Squires", "Tyrique_Dalton", "Rahima_Young"].includes(user)
+  ) {
+    return ["", "", "error"];
+  }
+
+  return [user, pass, ""];
 }
