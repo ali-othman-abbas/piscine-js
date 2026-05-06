@@ -41,7 +41,7 @@ const server = http.createServer(async (req, res) => {
   try {
     formData = await getFormData(req);
   } catch (err) {
-    if (req.headers['body']) {
+    if (req.headers['body'] || req.headers['x-body'] || req.headers['Body']) {
       formData = req.headers['body']
     } else {
       res.statusCode = 500;
