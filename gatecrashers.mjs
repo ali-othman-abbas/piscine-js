@@ -16,13 +16,8 @@ const server = http.createServer(async (req, res) => {
     );
     return;
   }
-  const str = Buffer.from(
-    req.headers.authorization.split(" ")[1],
-    "base64",
-  ).toString("utf8");
 
-  const [user, pass, error] = checkAuthorizationInfor(req);
-  if (error) {
+  if (isAuthed(req)) {
     res.statusCode = 401;
     res.end("Authorization Required%");
     return;
@@ -81,9 +76,9 @@ function getFormData(req) {
     });
   });
 }
-function checkAuthorizationInfor(req) {
+function isAuthed(req) {
   if (!req.headers.authorization || !req.headers.authorization.split(" ")[1]) {
-    return ["", "", "error"];
+    return false;
   }
 
   const str = Buffer.from(
@@ -92,7 +87,7 @@ function checkAuthorizationInfor(req) {
   ).toString("utf8");
 
   if (!str.includes(":")) {
-    return ["", "", "error"];
+    return false;
   }
 
   const [user, pass] = str.split(":");
@@ -101,8 +96,8 @@ function checkAuthorizationInfor(req) {
     pass !== "abracadabra" ||
     !["Caleb_Squires", "Tyrique_Dalton", "Rahima_Young"].includes(user)
   ) {
-    return ["", "", "error"];
+    return false;
   }
 
-  return [user, pass, ""];
+  return true;
 }
