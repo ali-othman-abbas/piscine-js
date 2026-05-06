@@ -1,4 +1,5 @@
 import * as fs from "fs/promises";
+import { Resolver } from "node:dns";
 import * as http from "node:http";
 
 const server = http.createServer(async (req, res) => {
@@ -41,12 +42,9 @@ const server = http.createServer(async (req, res) => {
   try {
     formData = await getFormData(req);
   } catch (err) {
-    if (req.headers["body"]) {
-      formData = req.headers["body"];
-    } else if (req.headers["x-body"]) {
-      formData = req.headers["x-body"];
-    } else if (req.headers["Body"]) {
-      formData = req.headers['Body']
+    if (req.headers["body"] || req.headers["Body"] || req.headers["x-body"]) {
+      formData =
+        req.headers["body"] || req.headers["Body"] || req.headers["x-body"];
     } else {
       res.statusCode = 500;
       console.log(err);
@@ -85,8 +83,11 @@ function getFormData(req) {
       data.push(chunk);
     });
 
-    req.on("end", () => res(Buffer.concat(data).toString("utf8")));
-
-    req.on("error", (err) => rej(err));
+    req.on("end", () => {
+      const result =
+        req.headers["body"] || req.headers["Body"] || req.headers["x-body"];
+      
+      res(data.join("") || result || '')
+    });
   });
 }
