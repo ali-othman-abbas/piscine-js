@@ -41,8 +41,12 @@ const server = http.createServer(async (req, res) => {
   try {
     formData = await getFormData(req);
   } catch (err) {
-    if (req.headers['body'] || req.headers['x-body'] || req.headers['Body']) {
-      formData = req.headers['body']
+    if (req.headers["body"]) {
+      formData = req.headers["body"];
+    } else if (req.headers["x-body"]) {
+      formData = req.headers["x-body"];
+    } else if (req.headers["Body"]) {
+      formData = req.headers['Body']
     } else {
       res.statusCode = 500;
       console.log(err);
@@ -54,7 +58,7 @@ const server = http.createServer(async (req, res) => {
       return;
     }
   }
-  
+
   const file = `./guests/${req.url}.json`;
   try {
     await fs.writeFile(file, formData);
