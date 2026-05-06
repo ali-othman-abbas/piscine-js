@@ -50,10 +50,11 @@ const server = http.createServer(async (req, res) => {
     );
     return;
   }
+  console.log(formData)
   const file = `./guests/${req.url}.json`;
   try {
     await fs.writeFile(file, formData);
-    res.statusCode = 201;
+    res.statusCode = 200;
     res.end(formData);
   } catch (err) {
     res.statusCode = 500;
@@ -73,6 +74,7 @@ function getFormData(req) {
   const data = [];
   return new Promise((res, rej) => {
     req.on("data", (chunk) => {
+      console.log(chunk)
       data.push(chunk);
     });
 
