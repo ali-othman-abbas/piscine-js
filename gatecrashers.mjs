@@ -1,5 +1,4 @@
 import * as fs from "fs/promises";
-import { Resolver } from "node:dns";
 import * as http from "node:http";
 
 const server = http.createServer(async (req, res) => {
@@ -28,7 +27,7 @@ const server = http.createServer(async (req, res) => {
   )
     .toString("utf8")
   
-  if (!str.includes[':']) {
+  if (!str.includes(':')) {
     res.statusCode = 401;
     res.end("Authorization Required%");
     return;
@@ -65,7 +64,7 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
-  const file = `./guests/${req.url}.json`;
+  const file = `./guests/${req.url.slice(1)}.json`;
   try {
     await fs.writeFile(file, formData);
     res.statusCode = 200;
