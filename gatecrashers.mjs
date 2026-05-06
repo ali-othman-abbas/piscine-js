@@ -5,15 +5,7 @@ const server = http.createServer(async (req, res) => {
   res.setHeader("content-type", "application/json");
   if (req.method !== "POST") {
     res.statusCode = 404;
-    res.end(
-      JSON.stringify(
-        {
-          error: "Bad request",
-        },
-        null,
-        2,
-      ),
-    );
+    res.end(JSON.stringify({ error: "Bad request" }, null, 2));
     return;
   }
 
@@ -33,11 +25,7 @@ const server = http.createServer(async (req, res) => {
     } else {
       res.statusCode = 500;
       console.log(err);
-      res.end(
-        JSON.stringify({
-          error: "server failed",
-        }),
-      );
+      res.end( JSON.stringify({ error: "server failed", }), );
       return;
     }
   }
@@ -50,11 +38,7 @@ const server = http.createServer(async (req, res) => {
   } catch (err) {
     res.statusCode = 500;
     console.log(err);
-    res.end(
-      JSON.stringify({
-        error: "server failed",
-      }),
-    );
+    res.end( JSON.stringify({ error: "server failed", }), );
     return;
   }
 });
