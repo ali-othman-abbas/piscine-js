@@ -16,9 +16,7 @@ main(arg1, arg2, arg3, arg4);
  * @returns
  */
 async function main(fileName, command, name, numStr) {
-  if (fileName === "help" ||
-    fileName && command === "help" ||
-    fileName && !command) {
+  if (fileName === "help" || command === "help" || (fileName && !command)) {
     console.log(`Commands:
     - create: takes a filename as argument and create it (should have \`.json\` extension specified)
     - delete: takes a filename as argument and delete it
@@ -59,7 +57,7 @@ async function main(fileName, command, name, numStr) {
   if (fileName && command === "rm" && name) {
     if (numStr === undefined) {
       deleteFromFile(fileName, name, undefined);
-      return
+      return;
     }
     const num = Number(numStr);
     deleteFromFile(fileName, name, num);
@@ -90,8 +88,8 @@ async function addToFile(fileName, name, num) {
     list[name] = 0;
   }
   list[name] = list[name] + addNum;
-  
-  await writeFile(fileName, JSON.stringify(list))
+
+  await writeFile(fileName, JSON.stringify(list));
 }
 
 /**
@@ -115,14 +113,14 @@ async function deleteFromFile(fileName, name, num) {
   list = JSON.parse(content);
   if (!num) {
     delete list[name];
-    await writeFile(fileName, JSON.stringify(list))
-    return 
+    await writeFile(fileName, JSON.stringify(list));
+    return;
   }
   list[name] = list[name] - num;
   if (list[name] <= 0) {
     delete list[name];
   }
-  await writeFile(fileName, JSON.stringify(list))
+  await writeFile(fileName, JSON.stringify(list));
 }
 
 /**
@@ -140,6 +138,6 @@ async function ls(fileName) {
     console.log(`- ${key} (${list[key]})`);
   }
   if (isEmpty) {
-    console.log("Empty list.")
+    console.log("Empty list.");
   }
 }
