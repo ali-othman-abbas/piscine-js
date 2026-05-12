@@ -38,7 +38,7 @@ async function main(fileName, command, name, numStr) {
   }
 
   if (fileName && command === "add" && !name) {
-    console.error("No elem specified");
+    console.error("No elem specified.");
     return;
   }
 
@@ -48,7 +48,7 @@ async function main(fileName, command, name, numStr) {
   }
 
   if (fileName && command === "rm" && !name) {
-    console.error("No elem specified");
+    console.error("No elem specified.");
     return;
   }
   if (fileName && command === "rm" && name) {
