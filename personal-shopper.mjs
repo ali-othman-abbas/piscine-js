@@ -28,7 +28,7 @@ async function main(fileName, command, name, numStr) {
     return;
   }
   if (fileName && command === "create") {
-    await writeFile(fileName, "");
+    await writeFile(fileName, "{}");
     return;
   }
 
@@ -80,11 +80,7 @@ async function addToFile(fileName, name, num) {
 
   let list = null;
   const content = await readFile(fileName, "utf8");
-  if (content === "") {
-    list = {};
-  } else {
-    list = JSON.parse(content);
-  }
+  list = JSON.parse(content);
   if (!(name in list)) {
     list[name] = 0;
   }
@@ -111,11 +107,7 @@ async function deleteFromFile(fileName, name, num) {
 
   let list = null;
   const content = await readFile(fileName, "utf8");
-  if (content === "") {
-    list = {};
-  } else {
-    list = JSON.parse(content);
-  }
+  list = JSON.parse(content);
   if (!num) {
     delete list[name];
     await writeFile(fileName, JSON.stringify(list))
