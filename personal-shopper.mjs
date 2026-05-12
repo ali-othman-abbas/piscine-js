@@ -16,7 +16,7 @@ main(arg1, arg2, arg3, arg4);
  * @returns
  */
 async function main(fileName, command, name, numStr) {
-  if (fileName === "help" || !fileName) {
+  if (fileName === "help" || fileName && !command) {
     console.log(`Commands:
     - create: takes a filename as argument and create it (should have \`.json\` extension specified)
     - delete: takes a filename as argument and delete it
