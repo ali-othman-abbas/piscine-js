@@ -20,7 +20,10 @@ async function main(fileName, command, name, numStr) {
     console.log(`Commands:
     - create: takes a filename as argument and create it (should have \`.json\` extension specified)
     - delete: takes a filename as argument and delete it
-    <!-- etc. -->`);
+    - add: stuffff
+    - rm: stuff some more
+    - ls: more stuff frfr
+    - help: helpyyyy`);
     return;
   }
   if (command === "ls" || !command) {
