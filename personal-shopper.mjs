@@ -134,4 +134,7 @@ async function ls(fileName) {
     }
     console.log(`- ${key} (${list[key]})`);
   }
+  if (isEmpty) {
+    console.log("Empty list.")
+  }
 }
